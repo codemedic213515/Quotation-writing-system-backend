@@ -1,0 +1,19 @@
+{
+    "configurations": [
+
+        {
+            "type": "node-terminal",
+            "name": "Run Script: dev",
+            "request": "launch",
+            "command": "npm run dev",
+            "cwd": "${workspaceFolder}\\frontend"
+        },
+        {
+            "type": "msedge",
+            "request": "launch",
+            "name": "Launch Edge against localhost",
+            "url": "${workspaceFolder}\\frontend\\index.html",
+            "webRoot": "${workspaceFolder}"
+          }
+    ]
+}
