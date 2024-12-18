@@ -1,0 +1,152 @@
+{
+    "data": [
+        {
+            "id": 8834,
+            "attributes": {
+                "address": "111, Nice Road in Belleville, La belle Province",
+                "createdAt": "2024-07-22T18:41:15.987Z",
+                "updatedAt": "2024-07-22T18:41:15.987Z",
+                "publishedAt": "2024-07-22T18:41:15.980Z",
+                "name": "Pedrogfydfgh Duarte",
+                "orderTotal": "$994.95",
+                "cartItems": [
+                    {
+                        "image": "https://images.pexels.com/photos/943150/pexels-photo-943150.jpeg?auto=compress&cs=tinysrgb&w=1600",
+                        "price": "17999",
+                        "title": "avant-garde lamp",
+                        "amount": 5,
+                        "cartID": "19#3366FF",
+                        "company": "Modenza",
+                        "productID": 19,
+                        "productColor": "#3366FF"
+                    }
+                ],
+                "numItemsInCart": 5
+            }
+        },
+        {
+            "id": 8833,
+            "attributes": {
+                "address": "111, Nice Road in Belleville, La belle Province",
+                "createdAt": "2024-07-22T18:28:14.166Z",
+                "updatedAt": "2024-07-22T18:28:14.166Z",
+                "publishedAt": "2024-07-22T18:28:14.162Z",
+                "name": "Pedrogfydfgh Duarte",
+                "orderTotal": "$3,546.79",
+                "cartItems": [
+                    {
+                        "image": "https://images.pexels.com/photos/3679601/pexels-photo-3679601.jpeg?auto=compress&cs=tinysrgb&w=1260&h=750&dpr=2",
+                        "price": "17999",
+                        "title": "coffee table",
+                        "amount": 9,
+                        "cartID": "6#FF5733",
+                        "company": "Modenza",
+                        "productID": 6,
+                        "productColor": "#FF5733"
+                    },
+                    {
+                        "image": "https://images.pexels.com/photos/1571459/pexels-photo-1571459.jpeg?auto=compress&cs=tinysrgb&w=1600",
+                        "price": "15999",
+                        "title": "contemporary sofa",
+                        "amount": 10,
+                        "cartID": "13#FFFF00",
+                        "company": "Comfora",
+                        "productID": 13,
+                        "productColor": "#FFFF00"
+                    }
+                ],
+                "numItemsInCart": 19
+            }
+        },
+        {
+            "id": 8831,
+            "attributes": {
+                "address": "111, Nice Road in Belleville, La belle Province",
+                "createdAt": "2024-07-22T17:39:20.272Z",
+                "updatedAt": "2024-07-22T17:39:20.272Z",
+                "publishedAt": "2024-07-22T17:39:20.266Z",
+                "name": "Pedrogfydfgh Duarte",
+                "orderTotal": "$994.95",
+                "cartItems": [
+                    {
+                        "image": "https://images.pexels.com/photos/3679601/pexels-photo-3679601.jpeg?auto=compress&cs=tinysrgb&w=1260&h=750&dpr=2",
+                        "price": "17999",
+                        "title": "coffee table",
+                        "amount": 5,
+                        "cartID": "6#FFFF00",
+                        "company": "Modenza",
+                        "productID": 6,
+                        "productColor": "#FFFF00"
+                    }
+                ],
+                "numItemsInCart": 5
+            }
+        },
+        {
+            "id": 8830,
+            "attributes": {
+                "address": "111, Nice Road in Belleville, La belle Province",
+                "createdAt": "2024-07-22T17:38:52.485Z",
+                "updatedAt": "2024-07-22T17:38:52.485Z",
+                "publishedAt": "2024-07-22T17:38:52.480Z",
+                "name": "Pedrogfydfgh Duarte",
+                "orderTotal": "$3,370.90",
+                "cartItems": [
+                    {
+                        "image": "https://images.pexels.com/photos/5705090/pexels-photo-5705090.jpeg?auto=compress&cs=tinysrgb&w=1600",
+                        "price": "33999",
+                        "title": "chic chair",
+                        "amount": 9,
+                        "cartID": "12#FF5733",
+                        "company": "Luxora",
+                        "productID": 12,
+                        "productColor": "#FF5733"
+                    }
+                ],
+                "numItemsInCart": 9
+            }
+        },
+        {
+            "id": 6910,
+            "attributes": {
+                "address": "111 First Avenue, Oneville, PrimeState",
+                "createdAt": "2024-04-28T21:46:15.345Z",
+                "updatedAt": "2024-04-28T21:46:15.345Z",
+                "publishedAt": "2024-04-28T21:46:15.339Z",
+                "name": "John",
+                "orderTotal": "$796.96",
+                "cartItems": [
+                    {
+                        "image": "https://images.pexels.com/photos/943150/pexels-photo-943150.jpeg?auto=compress&cs=tinysrgb&w=1600",
+                        "price": "17999",
+                        "title": "avant-garde lamp",
+                        "amount": 1,
+                        "cartID": "19#3366FF",
+                        "company": "Modenza",
+                        "productID": 19,
+                        "productColor": "#3366FF"
+                    },
+                    {
+                        "image": "https://images.pexels.com/photos/943150/pexels-photo-943150.jpeg?auto=compress&cs=tinysrgb&w=1600",
+                        "price": "17999",
+                        "title": "avant-garde lamp",
+                        "amount": 3,
+                        "cartID": "19#33FF57",
+                        "company": "Modenza",
+                        "productID": 19,
+                        "productColor": "#33FF57"
+                    }
+                ],
+                "numItemsInCart": 4
+            }
+        }
+    ],
+    "meta": {
+        "pagination": {
+            "page": 1,
+            "pageSize": 10,
+            "pageCount": 1,
+            "total": 5
+        }
+    }
+}

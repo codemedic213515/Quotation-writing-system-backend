@@ -1,0 +1,515 @@
+{
+    "data": [
+        {
+            "id": 19,
+            "attributes": {
+                "title": "The Gambler",
+                "company": "William C. Rempel",
+		"isbn": "978-0062456786",
+                "description": "How Penniless Dropout Kirk Kerkorian Became the Greatest Deal Maker in Capitalist History. Cloud bread VHS hell of banjo bicycle rights jianbing umami mumblecore etsy 8-bit pok pok +1 wolf. Vexillologist yr dreamcatcher waistcoat, authentic chillwave trust fund. Viral typewriter fingerstache pinterest pork belly narwhal. Schlitz venmo everyday carry kitsch pitchfork chillwave iPhone taiyaki trust fund hashtag kinfolk microdosing gochujang live-edge",
+                "featured": true,
+                "createdAt": "2023-08-10T10:07:41.876Z",
+                "updatedAt": "2023-08-10T10:16:43.298Z",
+                "publishedAt": "2023-08-10T10:07:44.157Z",
+                "category": "Economics",
+                "image": "images/91HZDyCUY1L._SX342_.jpg?auto=compress&cs=tinysrgb&w=1600",
+                "price": "1199",
+                "shipping": false,
+                "colors": [
+                    "#33FF57",
+                    "#3366FF"
+                ]
+            }
+        },
+        {
+            "id": 12,
+            "attributes": {
+                "title": "The Psychology of Money",
+                "company": "Morgan Housel",
+		"isbn": "978-0857197689",
+                "description": "Timeless lessons on wealth, greed, and happiness. Cloud bread VHS hell of banjo bicycle rights jianbing umami mumblecore etsy 8-bit pok pok +1 wolf. Vexillologist yr dreamcatcher waistcoat, authentic chillwave trust fund. Viral typewriter fingerstache pinterest pork belly narwhal. Schlitz venmo everyday carry kitsch pitchfork chillwave iPhone taiyaki trust fund hashtag kinfolk microdosing gochujang live-edge",
+                "featured": false,
+                "createdAt": "2023-08-10T09:32:58.392Z",
+                "updatedAt": "2023-08-10T09:33:03.728Z",
+                "publishedAt": "2023-08-10T09:33:03.598Z",
+                "category": "Law",
+                "image": "images/71aG0m9XRcL._SY466_.jpg?auto=compress&cs=tinysrgb&w=1600",
+                "price": "1765",
+                "shipping": true,
+                "colors": [
+                    "#FF5733",
+                    "#33FF57",
+                    "#3366FF"
+                ]
+            }
+        },
+        {
+            "id": 6,
+            "attributes": {
+                "title": "Can't Hurt Me",
+                "company": "David Goggins",
+		"isbn": "978-1544512273",
+                "description": "Master Your Mind and Defy the Odds. Cloud bread VHS hell of banjo bicycle rights jianbing umami mumblecore etsy 8-bit pok pok +1 wolf. Vexillologist yr dreamcatcher waistcoat, authentic chillwave trust fund. Viral typewriter fingerstache pinterest pork belly narwhal. Schlitz venmo everyday carry kitsch pitchfork chillwave iPhone taiyaki trust fund hashtag kinfolk microdosing gochujang live-edge",
+                "featured": true,
+                "createdAt": "2023-08-02T14:32:02.775Z",
+                "updatedAt": "2023-08-04T07:35:16.880Z",
+                "publishedAt": "2023-08-02T14:32:05.491Z",
+                "category": "Personal Transformation",
+                "image": "images/61pDNU9qEGL._SY466_.jpg?auto=compress&cs=tinysrgb&w=1260&h=750&dpr=2",
+                "price": "2356",
+                "shipping": false,
+                "colors": [
+                    "#FF5733",
+                    "#FFFF00"
+                ]
+            }
+        },
+        {
+            "id": 7,
+            "attributes": {
+                "title": "The Anxious Generation",
+                "company": "Jonathan Haidt",
+		"isbn": "978-0593655030",
+                "description": "How the Great Rewiring of Childhood Is Causing an Epidemic of Mental Illness. Cloud bread VHS hell of banjo bicycle rights jianbing umami mumblecore etsy 8-bit pok pok +1 wolf. Vexillologist yr dreamcatcher waistcoat, authentic chillwave trust fund. Viral typewriter fingerstache pinterest pork belly narwhal. Schlitz venmo everyday carry kitsch pitchfork chillwave iPhone taiyaki trust fund hashtag kinfolk microdosing gochujang live-edge",
+                "featured": true,
+                "createdAt": "2023-08-02T14:34:10.146Z",
+                "updatedAt": "2023-08-08T14:06:28.575Z",
+                "publishedAt": "2023-08-02T14:34:13.604Z",
+                "category": "Health",
+                "image": "images/81XP4hEXDXL._SY466_.jpg?auto=compress&cs=tinysrgb&w=1600",
+                "price": "2535",
+                "shipping": false,
+                "colors": [
+                    "#FF5733"
+                ]
+            }
+        },
+        {
+            "id": 13,
+            "attributes": {
+                "title": "The Art Of Saying NO",
+                "company": "Damon Zahariades",
+		"isbn": "978-1549572746",
+                "description": "How To Stand Your Ground, Reclaim Your Time And Energy, And Refuse To Be Taken For Granted (Without Feeling Guilty!) . Cloud bread VHS hell of banjo bicycle rights jianbing umami mumblecore etsy 8-bit pok pok +1 wolf. Vexillologist yr dreamcatcher waistcoat, authentic chillwave trust fund. Viral typewriter fingerstache pinterest pork belly narwhal. Schlitz venmo everyday carry kitsch pitchfork chillwave iPhone taiyaki trust fund hashtag kinfolk microdosing gochujang live-edge",
+                "featured": false,
+                "createdAt": "2023-08-10T09:34:24.429Z",
+                "updatedAt": "2023-08-10T09:34:27.095Z",
+                "publishedAt": "2023-08-10T09:34:26.981Z",
+                "category": "Psychology",
+                "image": "images/41haTw2g1pL._SY466_.jpg?auto=compress&cs=tinysrgb&w=1600",
+                "price": "1499",
+                "shipping": false,
+                "colors": [
+                    "#FFFF00"
+                ]
+            }
+        },
+        {
+            "id": 20,
+            "attributes": {
+                "title": "Imagine Heaven",
+                "company": "John Burke",
+		"isbn": "978-0801015267",
+                "description": "Near-Death Experiences, God's Promises, and the Exhilarating Future That Awaits You. Cloud bread VHS hell of banjo bicycle rights jianbing umami mumblecore etsy 8-bit pok pok +1 wolf. Vexillologist yr dreamcatcher waistcoat, authentic chillwave trust fund. Viral typewriter fingerstache pinterest pork belly narwhal. Schlitz venmo everyday carry kitsch pitchfork chillwave iPhone taiyaki trust fund hashtag kinfolk microdosing gochujang live-edge",
+                "featured": false,
+                "createdAt": "2023-08-10T10:08:58.922Z",
+                "updatedAt": "2023-08-10T10:09:01.251Z",
+                "publishedAt": "2023-08-10T10:09:01.135Z",
+                "category": "Theology",
+                "image": "images/81YG+VanNfL._SY466_.jpg?auto=compress&cs=tinysrgb&w=1600",
+                "price": "2099",
+                "shipping": true,
+                "colors": [
+                    "#FFFF00",
+                    "#3366FF"
+                ]
+            }
+        },
+        {
+            "id": 16,
+            "attributes": {
+                "title": "The Case for Christ",
+                "company": "Lee Strobel",
+		"isbn": "978-0310350033",
+                "description": "A Journalist's Personal Investigation of the Evidence for Jesus. Cloud bread VHS hell of banjo bicycle rights jianbing umami mumblecore etsy 8-bit pok pok +1 wolf. Vexillologist yr dreamcatcher waistcoat, authentic chillwave trust fund. Viral typewriter fingerstache pinterest pork belly narwhal. Schlitz venmo everyday carry kitsch pitchfork chillwave iPhone taiyaki trust fund hashtag kinfolk microdosing gochujang live-edge",
+                "featured": false,
+                "createdAt": "2023-08-10T10:02:51.583Z",
+                "updatedAt": "2023-08-10T10:02:53.797Z",
+                "publishedAt": "2023-08-10T10:02:53.674Z",
+                "category": "Theology",
+                "image": "images/71McrITcpNL._SY466_.jpg?auto=compress&cs=tinysrgb&w=1600",
+                "price": "1250",
+                "shipping": true,
+                "colors": [
+                    "#33FF57",
+                    "#FFFF00"
+                ]
+            }
+        },
+        {
+            "id": 21,
+            "attributes": {
+                "title": "The Case for a Creator",
+                "company": "Lee Strobel",
+		"isbn": "978-0310339281",
+                "description": "A Journalist Investigates Scientific Evidence That Points Toward God. Cloud bread VHS hell of banjo bicycle rights jianbing umami mumblecore etsy 8-bit pok pok +1 wolf. Vexillologist yr dreamcatcher waistcoat, authentic chillwave trust fund. Viral typewriter fingerstache pinterest pork belly narwhal. Schlitz venmo everyday carry kitsch pitchfork chillwave iPhone taiyaki trust fund hashtag kinfolk microdosing gochujang live-edge",
+                "featured": false,
+                "createdAt": "2023-08-10T10:10:46.803Z",
+                "updatedAt": "2023-08-10T10:10:48.971Z",
+                "publishedAt": "2023-08-10T10:10:48.858Z",
+                "category": "Theology",
+                "image": "images/81V4gh4WhzL._SY466_.jpg?auto=compress&cs=tinysrgb&w=1600",
+                "price": "2257",
+                "shipping": false,
+                "colors": [
+                    "#FF5733",
+                    "#3366FF"
+                ]
+            }
+        },
+        {
+            "id": 22,
+            "attributes": {
+                "title": "Grave Error",
+                "company": "Tom Flanagan",
+		"isbn": "979-8867599317",
+                "description": "How The Media Misled Us (and the Truth about Residential Schools). Cloud bread VHS hell of banjo bicycle rights jianbing umami mumblecore etsy 8-bit pok pok +1 wolf. Vexillologist yr dreamcatcher waistcoat, authentic chillwave trust fund. Viral typewriter fingerstache pinterest pork belly narwhal. Schlitz venmo everyday carry kitsch pitchfork chillwave iPhone taiyaki trust fund hashtag kinfolk microdosing gochujang live-edge",
+                "featured": false,
+                "createdAt": "2023-08-10T10:11:38.696Z",
+                "updatedAt": "2023-08-10T10:11:40.915Z",
+                "publishedAt": "2023-08-10T10:11:40.802Z",
+                "category": "History",
+                "image": "images/71YxbTt7ZhL._SY466_.jpg?auto=compress&cs=tinysrgb&w=1600",
+                "price": "2199",
+                "shipping": true,
+                "colors": [
+                    "#FF5733"
+                ]
+            }
+        },
+        {
+            "id": 24,
+            "attributes": {
+                "title": "Untold Tales of Old British Columbia",
+                "company": "Daniel Marshall",
+		"isbn": "978-1553807049",
+                "description": "Cloud bread VHS hell of banjo bicycle rights jianbing umami mumblecore etsy 8-bit pok pok +1 wolf. Vexillologist yr dreamcatcher waistcoat, authentic chillwave trust fund. Viral typewriter fingerstache pinterest pork belly narwhal. Schlitz venmo everyday carry kitsch pitchfork chillwave iPhone taiyaki trust fund hashtag kinfolk microdosing gochujang live-edge",
+                "featured": false,
+                "createdAt": "2023-08-10T10:13:29.629Z",
+                "updatedAt": "2023-08-10T10:15:29.354Z",
+                "publishedAt": "2023-08-10T10:13:31.792Z",
+                "category": "History",
+                "image": "images/81epXlNSK9L._SY466_.jpg?auto=compress&cs=tinysrgb&w=1600",
+                "price": "2495",
+                "shipping": false,
+                "colors": [
+                    "#FF5733",
+                    "#33FF57",
+                    "#3366FF"
+                ]
+            }
+        },
+        {
+            "id": 11,
+            "attributes": {
+                "title": "Beyond the Trees",
+                "company": "Adam Shoalts",
+		"isbn": "111-1553807049",
+                "description": "A Journey Alone Across Canada's Arctic. Cloud bread VHS hell of banjo bicycle rights jianbing umami mumblecore etsy 8-bit pok pok +1 wolf. Vexillologist yr dreamcatcher waistcoat, authentic chillwave trust fund. Viral typewriter fingerstache pinterest pork belly narwhal. Schlitz venmo everyday carry kitsch pitchfork chillwave iPhone taiyaki trust fund hashtag kinfolk microdosing gochujang live-edge",
+                "featured": false,
+                "createdAt": "2023-08-10T09:31:43.653Z",
+                "updatedAt": "2023-08-10T09:31:46.013Z",
+                "publishedAt": "2023-08-10T09:31:45.900Z",
+                "category": "History",
+                "image": "images/81Pogho-bgL._SY466_.jpg?auto=compress&cs=tinysrgb&w=1600",
+                "price": "2200",
+                "shipping": false,
+                "colors": [
+                    "#FF5733",
+                    "#FFFF00"
+                ]
+            }
+        },
+        {
+            "id": 5,
+            "attributes": {
+                "title": "Outlive",
+                "company": "Peter Attia MD",
+		"isbn": "111-1553807049",
+                "description": "The Science and Art of Longevity. Cloud bread VHS hell of banjo bicycle rights jianbing umami mumblecore etsy 8-bit pok pok +1 wolf. Vexillologist yr dreamcatcher waistcoat, authentic chillwave trust fund. Viral typewriter fingerstache pinterest pork belly narwhal. Schlitz venmo everyday carry kitsch pitchfork chillwave iPhone taiyaki trust fund hashtag kinfolk microdosing gochujang live-edge",
+                "featured": false,
+                "createdAt": "2023-08-02T14:25:10.447Z",
+                "updatedAt": "2023-08-08T14:04:21.619Z",
+                "publishedAt": "2023-08-02T14:25:28.344Z",
+                "category": "Health",
+                "image": "images/71IQ8lCksdL._SX342_.jpg?auto=compress&cs=tinysrgb&w=1260&h=750&dpr=2",
+                "price": "2661",
+                "shipping": false,
+                "colors": [
+                    "#FF5733",
+                    "#33FF57",
+                    "#FFFF00"
+                ]
+            }
+        },
+        {
+            "id": 9,
+            "attributes": {
+                "title": "Good Energy",
+                "company": "Casey Means MD",
+		"isbn": "111-1553807049",
+                "description": "The Surprising Connection Between Metabolism and Limitless Health. Cloud bread VHS hell of banjo bicycle rights jianbing umami mumblecore etsy 8-bit pok pok +1 wolf. Vexillologist yr dreamcatcher waistcoat, authentic chillwave trust fund. Viral typewriter fingerstache pinterest pork belly narwhal. Schlitz venmo everyday carry kitsch pitchfork chillwave iPhone taiyaki trust fund hashtag kinfolk microdosing gochujang live-edge",
+                "featured": false,
+                "createdAt": "2023-08-08T14:02:24.368Z",
+                "updatedAt": "2023-08-08T14:53:24.452Z",
+                "publishedAt": "2023-08-08T14:02:33.536Z",
+                "category": "Health",
+                "image": "images/71I-yYonEcL._SX342_.jpg?auto=compress&cs=tinysrgb&w=1600",
+                "price": "3541",
+                "shipping": true,
+                "colors": [
+                    "#33FF57",
+                    "#3366FF"
+                ]
+            }
+        },
+        {
+            "id": 18,
+            "attributes": {
+                "title": "The Complete Anti-Inflammatory Diet for Beginners",
+                "company": "Dorothy Calimeris",
+		"isbn": "978-1623159047",
+                "description": "A No-Stress Meal Plan with Easy Recipes to Heal the Immune System. Cloud bread VHS hell of banjo bicycle rights jianbing umami mumblecore etsy 8-bit pok pok +1 wolf. Vexillologist yr dreamcatcher waistcoat, authentic chillwave trust fund. Viral typewriter fingerstache pinterest pork belly narwhal. Schlitz venmo everyday carry kitsch pitchfork chillwave iPhone taiyaki trust fund hashtag kinfolk microdosing gochujang live-edge",
+                "featured": false,
+                "createdAt": "2023-08-10T10:05:57.858Z",
+                "updatedAt": "2023-08-10T10:06:01.554Z",
+                "publishedAt": "2023-08-10T10:06:01.438Z",
+                "category": "Diet",
+                "image": "images/81lVy3FNL+L._SY466_.jpg?auto=compress&cs=tinysrgb&w=1600",
+                "price": "1795",
+                "shipping": false,
+                "colors": [
+                    "#FF5733",
+                    "#33FF57",
+                    "#3366FF",
+                    "#FFFF00"
+                ]
+            }
+        },
+        {
+            "id": 25,
+            "attributes": {
+                "title": "The Good Life! Mediterranean Diet Cookbook",
+                "company": "Dorothy Calimeris",
+		"isbn": "111-1623159047",
+                "description": "Eat, Drink, and Live a Heart-Healthy Lifestyle. Cloud bread VHS hell of banjo bicycle rights jianbing umami mumblecore etsy 8-bit pok pok +1 wolf. Vexillologist yr dreamcatcher waistcoat, authentic chillwave trust fund. Viral typewriter fingerstache pinterest pork belly narwhal. Schlitz venmo everyday carry kitsch pitchfork chillwave iPhone taiyaki trust fund hashtag kinfolk microdosing gochujang live-edge",
+                "featured": false,
+                "createdAt": "2023-08-10T10:14:14.760Z",
+                "updatedAt": "2023-08-10T10:14:17.029Z",
+                "publishedAt": "2023-08-10T10:14:16.909Z",
+                "category": "Diet",
+                "image": "images/A1afPStOaTL._SY466_.jpg?auto=compress&cs=tinysrgb&w=1600",
+                "price": "2101",
+                "shipping": true,
+                "colors": [
+                    "#FF5733",
+                    "#33FF57",
+                    "#3366FF",
+                    "#FFFF00"
+                ]
+            }
+        },
+        {
+            "id": 10,
+            "attributes": {
+                "title": "The Blue Zones Kitchen",
+                "company": "Dan Buettner",
+		"isbn": "111-1623159047",
+                "description": "100 Recipes to Live to 100. Cloud bread VHS hell of banjo bicycle rights jianbing umami mumblecore etsy 8-bit pok pok +1 wolf. Vexillologist yr dreamcatcher waistcoat, authentic chillwave trust fund. Viral typewriter fingerstache pinterest pork belly narwhal. Schlitz venmo everyday carry kitsch pitchfork chillwave iPhone taiyaki trust fund hashtag kinfolk microdosing gochujang live-edge",
+                "featured": false,
+                "createdAt": "2023-08-10T09:30:26.259Z",
+                "updatedAt": "2023-08-10T09:30:28.876Z",
+                "publishedAt": "2023-08-10T09:30:28.763Z",
+                "category": "Diet",
+                "image": "images/A1-S+yW2frL._SY466_.jpg?auto=compress&cs=tinysrgb&w=1600",
+                "price": "3872",
+                "shipping": true,
+                "colors": [
+                    "#FFFF00",
+                    "#3366FF"
+                ]
+            }
+        },
+        {
+            "id": 4,
+            "attributes": {
+                "title": "The Rise of Wolf 8",
+                "company": "Rick McIntyre",
+		"isbn": "978-1771647809",
+                "description": "Witnessing the Triumph of Yellowstone's Underdog. Cloud bread VHS hell of banjo bicycle rights jianbing umami mumblecore etsy 8-bit pok pok +1 wolf. Vexillologist yr dreamcatcher waistcoat, authentic chillwave trust fund. Viral typewriter fingerstache pinterest pork belly narwhal. Schlitz venmo everyday carry kitsch pitchfork chillwave iPhone taiyaki trust fund hashtag kinfolk microdosing gochujang live-edge",
+                "featured": false,
+                "createdAt": "2023-08-01T11:14:57.336Z",
+                "updatedAt": "2023-08-10T10:17:13.540Z",
+                "publishedAt": "2023-08-01T11:15:39.281Z",
+                "category": "Environment",
+                "image": "images/91hYW0rTipL._SY466_.jpg?auto=compress&cs=tinysrgb&w=1600",
+                "price": "2495",
+                "shipping": false,
+                "colors": [
+                    "#FF5733",
+                    "#33FF57",
+                    "#3366FF",
+                    "#FFFF00"
+                ]
+            }
+        },
+        {
+            "id": 14,
+            "attributes": {
+                "title": "The Crusades",
+                "company": "Thomas Asbridge",
+		"isbn": "978-0060787295",
+                "description": "The Authoritative History of the War for the Holy Land. Cloud bread VHS hell of banjo bicycle rights jianbing umami mumblecore etsy 8-bit pok pok +1 wolf. Vexillologist yr dreamcatcher waistcoat, authentic chillwave trust fund. Viral typewriter fingerstache pinterest pork belly narwhal. Schlitz venmo everyday carry kitsch pitchfork chillwave iPhone taiyaki trust fund hashtag kinfolk microdosing gochujang live-edge",
+                "featured": false,
+                "createdAt": "2023-08-10T09:36:07.565Z",
+                "updatedAt": "2023-08-10T09:36:09.798Z",
+                "publishedAt": "2023-08-10T09:36:09.688Z",
+                "category": "History",
+                "image": "images/71EpTF7CJPL._SY466_.jpg?auto=compress&cs=tinysrgb&w=1600",
+                "price": "3000",
+                "shipping": true,
+                "colors": [
+                    "#FF5733",
+                    "#3366FF"
+                ]
+            }
+        },
+        {
+            "id": 15,
+            "attributes": {
+                "title": "The French Revolution",
+                "company": "Thomas Carlyle",
+		"isbn": "979-8411418323",
+                "description": "The French Revolution. Cloud bread VHS hell of banjo bicycle rights jianbing umami mumblecore etsy 8-bit pok pok +1 wolf. Vexillologist yr dreamcatcher waistcoat, authentic chillwave trust fund. Viral typewriter fingerstache pinterest pork belly narwhal. Schlitz venmo everyday carry kitsch pitchfork chillwave iPhone taiyaki trust fund hashtag kinfolk microdosing gochujang live-edge",
+                "featured": false,
+                "createdAt": "2023-08-10T10:01:20.801Z",
+                "updatedAt": "2023-08-10T10:01:24.100Z",
+                "publishedAt": "2023-08-10T10:01:23.986Z",
+                "category": "History",
+                "image": "images/61Qn7cP6jhL._SY466_.jpg?auto=compress&cs=tinysrgb&w=1600",
+                "price": "2499",
+                "shipping": true,
+                "colors": [
+                    "#FF5733"
+                ]
+            }
+        },
+        {
+            "id": 23,
+            "attributes": {
+                "title": "Einstein",
+                "company": "Walter Isaacson",
+		"isbn": "978-0743264747",
+                "description": "His Life and Universe. Cloud bread VHS hell of banjo bicycle rights jianbing umami mumblecore etsy 8-bit pok pok +1 wolf. Vexillologist yr dreamcatcher waistcoat, authentic chillwave trust fund. Viral typewriter fingerstache pinterest pork belly narwhal. Schlitz venmo everyday carry kitsch pitchfork chillwave iPhone taiyaki trust fund hashtag kinfolk microdosing gochujang live-edge",
+                "featured": false,
+                "createdAt": "2023-08-10T10:12:28.626Z",
+                "updatedAt": "2023-08-10T10:12:30.715Z",
+                "publishedAt": "2023-08-10T10:12:30.599Z",
+                "category": "History",
+                "image": "images/71M6EivDCnL._SY466_.jpg?auto=compress&cs=tinysrgb&w=1600",
+                "price": "2622",
+                "shipping": false,
+                "colors": [
+                    "#33FF57",
+                    "#FFFF00"
+                ]
+            }
+        },
+        {
+            "id": 17,
+            "attributes": {
+                "title": "Napoleon's Glance",
+                "company": "William Duggan",
+		"isbn": "111-0743264747",
+                "description": "The Secret of Strategy (Nation Books). Cloud bread VHS hell of banjo bicycle rights jianbing umami mumblecore etsy 8-bit pok pok +1 wolf. Vexillologist yr dreamcatcher waistcoat, authentic chillwave trust fund. Viral typewriter fingerstache pinterest pork belly narwhal. Schlitz venmo everyday carry kitsch pitchfork chillwave iPhone taiyaki trust fund hashtag kinfolk microdosing gochujang live-edge",
+                "featured": false,
+                "createdAt": "2023-08-10T10:04:26.080Z",
+                "updatedAt": "2023-08-10T10:04:29.084Z",
+                "publishedAt": "2023-08-10T10:04:28.969Z",
+                "category": "History",
+                "image": "images/51DmcUh8uwL._SY466_.jpg?auto=compress&cs=tinysrgb&w=1600",
+                "price": "1499",
+                "shipping": true,
+                "colors": [
+                    "#FF5733",
+                    "#33FF57",
+                    "#FFFF00"
+                ]
+            }
+        },
+        {
+            "id": 8,
+            "attributes": {
+                "title": "The Fall of the Ottomans",
+                "company": "Eugene Rogan",
+		"isbn": "978-0465097425",
+                "description": "The Great War in the Middle East. Cloud bread VHS hell of banjo bicycle rights jianbing umami mumblecore etsy 8-bit pok pok +1 wolf. Vexillologist yr dreamcatcher waistcoat, authentic chillwave trust fund. Viral typewriter fingerstache pinterest pork belly narwhal. Schlitz venmo everyday carry kitsch pitchfork chillwave iPhone taiyaki trust fund hashtag kinfolk microdosing gochujang live-edge",
+                "featured": false,
+                "createdAt": "2023-08-02T14:36:43.227Z",
+                "updatedAt": "2023-08-04T07:35:59.208Z",
+                "publishedAt": "2023-08-02T14:36:46.122Z",
+                "category": "History",
+                "image": "images/91uk0s3RbNL._SY466_.jpg?auto=compress&cs=tinysrgb&w=1260&h=750&dpr=2",
+                "price": "2210",
+                "shipping": true,
+                "colors": [
+                    "#33FF57",
+                    "#3366FF"
+                ]
+            }
+        }         
+    ],
+    "meta": {
+        "pagination": {
+            "page": 1,
+            "pageSize": 10,
+            "pageCount": 3,
+            "total": 22
+        },
+        "categories": [
+            "all",
+            "Economics",
+            "Environment",
+            "Diet",
+            "Health",
+            "History",
+            "Law",
+            "Personal Transformation",
+            "Psychology",
+            "Theology"
+        ],
+        "companies": [
+            "all",
+            "Adam Shoalts",
+            "Casey Means MD",
+            "Damon Zahariades",
+            "Daniel Marshall",
+            "Dan Buettner",
+            "David Goggins",
+            "Dorothy Calimeris",
+            "Eugene Rogan",
+            "John Burke",
+            "Jonathan Haidt",
+            "Lee Strobel",
+            "Morgan Housel",
+            "Peter Attia MD",
+            "Rick McIntyre",
+            "Thomas Asbridge",
+            "Thomas Carlyle",
+            "Tom Flanagan",
+            "Walter Isaacson",
+            "William Duggan",
+            "William C. Rempel"
+        ]
+    }
+}
