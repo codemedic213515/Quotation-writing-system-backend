@@ -1,8 +1,8 @@
 {
   "version": 2,
-  "dgSpecHash": "EaoOT81OVAY=",
+  "dgSpecHash": "ACxXttf5OC4=",
   "success": true,
-  "projectFilePath": "E:\\@Git\\@CodeMedic0911\\Quotation-writing-system\\Backend.csproj",
+  "projectFilePath": "E:\\@Git\\@CodeMedic0911\\Quotation-writing-system-backend\\Backend.csproj",
   "expectedPackageFiles": [
     "C:\\Users\\Amateur\\.nuget\\packages\\azure.core\\1.38.0\\azure.core.1.38.0.nupkg.sha512",
     "C:\\Users\\Amateur\\.nuget\\packages\\azure.identity\\1.11.4\\azure.identity.1.11.4.nupkg.sha512",
