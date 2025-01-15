@@ -1,15 +1,22 @@
-// File: Models/User.cs
+using System.ComponentModel.DataAnnotations;
+
 namespace QuotationWritingSystem.Models
 {
     public class User
     {
         public int Id { get; set; }
-        public string Code { get; set; } = string.Empty;
-        public string Name { get; set; } = string.Empty;
-        public string Pwd { get; set; } = string.Empty;
+
+        [Required]
+        [EmailAddress]
         public string Email { get; set; } = string.Empty;
-        public string Init { get; set; } = string.Empty; // 2-character unique code
-        public string Role { get; set; } = string.Empty;
-        public bool Deleted { get; set; } = false;
+
+        [Required]
+        [MinLength(6)]
+        public string Password { get; set; } = string.Empty;
+
+        public string? Code {get; set;}
+        public string? Name {get; set;}
+        public string Role { get; set; } = "user";
     }
 }
+
