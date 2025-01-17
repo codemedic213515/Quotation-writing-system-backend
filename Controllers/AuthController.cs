@@ -32,7 +32,8 @@ namespace QuotationWritingSystem.Controllers
             }
 
             var existingUser = _context.Users.SingleOrDefault(u => u.Email == userDto.Email);
-            if (existingUser != null)
+             var existUser = _context.Users.SingleOrDefault(u => u.Code == userDto.Code);
+            if (existingUser != null && existUser != null)
             {
                 return Conflict("User already exists.");
             }
@@ -59,7 +60,7 @@ namespace QuotationWritingSystem.Controllers
                 return BadRequest(ModelState);
             }
 
-            var user = _context.Users.SingleOrDefault(u => u.Email == request.Email);
+            var user = _context.Users.SingleOrDefault(u => u.Name == request.Name);
 
             if (user == null || !BCrypt.Net.BCrypt.Verify(request.Password, user.Password))
             {
@@ -86,7 +87,9 @@ namespace QuotationWritingSystem.Controllers
 
             var claims = new[]
             {
-                new Claim(JwtRegisteredClaimNames.Sub, user.Email),
+                new Claim(JwtRegisteredClaimNames.Sub, user.Role),
+                new Claim(JwtRegisteredClaimNames.NameId, user.Code),
+                new Claim(JwtRegisteredClaimNames.Name, user.Name),
                 new Claim(JwtRegisteredClaimNames.Jti, Guid.NewGuid().ToString())
             };
 
@@ -104,9 +107,8 @@ namespace QuotationWritingSystem.Controllers
 
     public class LoginRequest
     {
-        [Required(ErrorMessage = "Email is required.")]
-        [EmailAddress(ErrorMessage = "Invalid email address.")]
-        public string? Email { get; set; }
+        [Required(ErrorMessage = "Name is required.")]
+        public string? Name { get; set; }
 
         [Required(ErrorMessage = "Password is required.")]
         public string? Password { get; set; }

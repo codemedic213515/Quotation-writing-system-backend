@@ -13,9 +13,11 @@ namespace QuotationWritingSystem.Models
         [Required]
         [MinLength(6)]
         public string Password { get; set; } = string.Empty;
-
-        public string? Code {get; set;}
-        public string? Name {get; set;}
+        [Required]
+        public string Code {get; set;} = string.Empty;
+        [Required]
+        public string Name {get; set;} = string.Empty;
+        [Required]
         public string Role { get; set; } = "user";
     }
 }
