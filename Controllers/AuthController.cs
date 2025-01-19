@@ -7,6 +7,7 @@ using System.Security.Claims;
 using System.Text;
 using System.ComponentModel.DataAnnotations;
 using BCrypt.Net;
+using Microsoft.Extensions.Logging;
 
 namespace QuotationWritingSystem.Controllers
 {
@@ -14,14 +15,17 @@ namespace QuotationWritingSystem.Controllers
     [Route("api/auth")]
     public class AuthController : ControllerBase
     {
-        private readonly ApplicationDbContext _context;
-        private readonly IConfiguration _configuration;
+  
+    private readonly ApplicationDbContext _context;
+    private readonly IConfiguration _configuration;
+    private readonly ILogger<AuthController> _logger;
 
-        public AuthController(ApplicationDbContext context, IConfiguration configuration)
-        {
-            _context = context;
-            _configuration = configuration;
-        }
+    public AuthController(ApplicationDbContext context, IConfiguration configuration, ILogger<AuthController> logger)
+    {
+        _context = context;
+        _configuration = configuration;
+        _logger = logger;
+    }
 
         [HttpPost("register")]
         public IActionResult Register([FromBody] UserDto userDto)
@@ -49,13 +53,14 @@ namespace QuotationWritingSystem.Controllers
             // Hash password before saving
             var hashedPassword = BCrypt.Net.BCrypt.HashPassword(userDto.Password);
 
-            var user = new Users  // Change User to Users here
+            var user = new Users
             {
                 Email = userDto.Email,
                 Password = hashedPassword,  // Save the hashed password
                 Code = userDto.Code,
                 Name = userDto.Name,
                 Role = "User",  // Default role, modify this as per your needs
+                Delete = false  // Default to not deleted
             };
 
             _context.Users.Add(user);
@@ -88,7 +93,83 @@ namespace QuotationWritingSystem.Controllers
             return Ok(new { Token = token });
         }
 
-        private string GenerateJwtToken(Users user)  // Change User to Users here
+      [HttpGet("validateToken")]
+public IActionResult ValidateToken([FromQuery] string token)
+{
+    // Initialize the JWT handler and log the token
+    _logger.LogInformation("Token validation started for token: {Token}", token);
+    
+    var handler = new JwtSecurityTokenHandler();
+    try
+    {
+        // Decode the token
+        var jwtToken = handler.ReadJwtToken(token);  // Parse the JWT token
+        
+        // Extract the user code from the token (Claims)
+        var userCode = jwtToken?.Claims.FirstOrDefault(c => c.Type == JwtRegisteredClaimNames.NameId)?.Value;
+        
+        // Log the extracted userCode
+        _logger.LogInformation("Extracted userCode from token: {UserCode}", userCode);
+        
+        // Extract the expiration timestamp from the token and parse it
+        var expTimestamp = jwtToken?.Claims.FirstOrDefault(c => c.Type == JwtRegisteredClaimNames.Exp)?.Value;
+        
+        // If no expiration timestamp is found, log and return Unauthorized
+        if (string.IsNullOrEmpty(expTimestamp))
+        {
+            _logger.LogWarning("Token does not have an expiration field.");
+            return Unauthorized("Token does not have an expiration field.");
+        }
+
+        var expDate = DateTimeOffset.FromUnixTimeSeconds(long.Parse(expTimestamp)).UtcDateTime;
+
+        // Check if the token has expired
+        if (DateTime.UtcNow > expDate)
+        {
+            _logger.LogWarning("Token has expired at: {ExpirationTime}", expDate);
+            return Unauthorized("Token has expired.");
+        }
+
+        // If the userCode is null or empty, return Unauthorized
+        if (string.IsNullOrEmpty(userCode))
+        {
+            _logger.LogWarning("UserCode not found in token.");
+            return Unauthorized("Invalid token.");
+        }
+
+        // Log before checking the database
+        _logger.LogInformation("Validating user with code: {UserCode} in the database.", userCode);
+
+        // Now, verify the token against the database
+        var user = _context.Users.SingleOrDefault(u => u.Code == userCode);
+
+        // If the user is not found or is marked as deleted
+        if (user == null)
+        {
+            _logger.LogWarning("User not found in the database: {UserCode}", userCode);
+            return Unauthorized("Token is invalid or user not found.");
+        }
+        
+        // Check if the user is marked as deleted
+        if (user.Delete==true)
+        {
+            _logger.LogWarning("User with code {UserCode} is marked as deleted.", userCode);
+            return Unauthorized("User is deleted.");
+        }
+
+        // Log success if token is valid
+        _logger.LogInformation("Token is valid and user is active: {UserCode}", userCode);
+
+        return Ok("Token is Valid");  // Token is valid and the user is not deleted
+    }
+    catch (Exception ex)
+    {
+        // Log the error if an exception occurs
+        _logger.LogError(ex, "Error occurred while validating token.");
+        return Unauthorized("Invalid token.");
+    }
+}
+        private string GenerateJwtToken(Users user)
         {
             var jwtKey = _configuration["Jwt:Key"];
             var jwtIssuer = _configuration["Jwt:Issuer"];
