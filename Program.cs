@@ -9,22 +9,22 @@ var builder = WebApplication.CreateBuilder(args);
 // Add services to the container.
 builder.Services.AddControllers();
 
-// Configure database connection
-builder.Services.AddDbContext<AppDbContext>(options =>
+// Configure database connection using the connection string from appsettings.json
+builder.Services.AddDbContext<ApplicationDbContext>(options =>
     options.UseSqlServer(builder.Configuration.GetConnectionString("DefaultConnection")));
 
-// Add CORS policy
+// Add CORS policy for React app (replace with actual frontend URL)
 builder.Services.AddCors(options =>
 {
     options.AddPolicy("AllowReactApp", policy =>
     {
-        policy.WithOrigins("http://localhost:5173") // Replace with your frontend's URL
+        policy.WithOrigins("http://localhost:5173") // Frontend URL
               .AllowAnyHeader()
               .AllowAnyMethod();
     });
 });
 
-// Configure JWT authentication
+// Configure JWT authentication using TokenValidationParameters
 var jwtKey = builder.Configuration["Jwt:Key"];
 var jwtIssuer = builder.Configuration["Jwt:Issuer"];
 
@@ -52,17 +52,22 @@ builder.Services.AddAuthorization();
 
 var app = builder.Build();
 
-// Configure the HTTP request pipeline.
+// Configure the HTTP request pipeline based on the environment
 if (app.Environment.IsDevelopment())
 {
     app.UseDeveloperExceptionPage();
 }
+else
+{
+    // In production, ensure we have security headers and logging
+    app.UseHsts();
+}
 
-app.UseCors("AllowReactApp");
+app.UseCors("AllowReactApp"); // Use the React app CORS policy
 
-app.UseAuthentication();
-app.UseAuthorization();
+app.UseAuthentication(); // Ensure authentication is enabled
+app.UseAuthorization();  // Ensure authorization is enabled
 
-app.MapControllers();
+app.MapControllers(); // Map all API controllers
 
 app.Run();

@@ -2,7 +2,7 @@ using System.ComponentModel.DataAnnotations;
 
 namespace QuotationWritingSystem.Models
 {
-    public class QuotationMaterials
+    public class QuotationMaterial
     {
         [Required]
         public int Id { get; set; }
