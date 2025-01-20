@@ -6,8 +6,8 @@ namespace QuotationWritingSystem.Data
     public class ApplicationDbContext : DbContext
     {
         // Add DbSet for each entity
-        public DbSet<ABMaterialMaster> ABMaterialMasters { get; set; }
-        public DbSet<AddressMaster> AddressMasters { get; set; }
+        public DbSet<ABMaterialMaster> ABMaterialMaster { get; set; }
+        public DbSet<AddressMaster> AddressMaster { get; set; }
         public DbSet<CategoryMaterialMaster1> CategoryMaterialMasters1 { get; set; }
         public DbSet<CategoryMaterialMaster2> CategoryMaterialMasters2 { get; set; }
         public DbSet<CategoryMaterialMaster3> CategoryMaterialMasters3 { get; set; }
@@ -35,7 +35,7 @@ namespace QuotationWritingSystem.Data
         {
             if (!optionsBuilder.IsConfigured)
             {
-                optionsBuilder.UseSqlServer("YourConnectionStringHere"); // Use this if not configuring in Startup/Program.cs
+                optionsBuilder.UseSqlServer("YourConnectionStringHere"); 
             }
         }
 
