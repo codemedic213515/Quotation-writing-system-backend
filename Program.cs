@@ -11,7 +11,8 @@ builder.Services.AddControllers();
 
 // Configure database connection using the connection string from appsettings.json
 builder.Services.AddDbContext<ApplicationDbContext>(options =>
-    options.UseSqlServer(builder.Configuration.GetConnectionString("DefaultConnection")));
+    options.UseSqlServer(builder.Configuration.GetConnectionString("DefaultConnection"))
+);
 
 // Add CORS policy for React app (replace with actual frontend URL)
 builder.Services.AddCors(options =>
@@ -20,7 +21,8 @@ builder.Services.AddCors(options =>
     {
         policy.WithOrigins("http://localhost:5173") // Frontend URL
               .AllowAnyHeader()
-              .AllowAnyMethod();
+              .AllowAnyMethod()
+                    .AllowCredentials(); 
     });
 });
 
@@ -48,7 +50,11 @@ builder.Services.AddAuthentication(JwtBearerDefaults.AuthenticationScheme)
         };
     });
 
-builder.Services.AddAuthorization();
+builder.Services.AddAuthorization();  // Add authorization services
+builder.Services.AddLogging(options =>
+{
+    options.AddConsole();  // Add console logging
+});
 
 var app = builder.Build();
 
