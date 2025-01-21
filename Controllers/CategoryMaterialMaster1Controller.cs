@@ -59,10 +59,9 @@ public class CategoryMaterialMaster1Controller : ControllerBase
         }
 
         existingMaterial.Name = material.Name;
-        existingMaterial.SelectFlag = material.SelectFlag;
-        existingMaterial.DetailFlag = material.DetailFlag;
+
         existingMaterial.Delete = material.Delete;
-        existingMaterial.Material = material.Material;
+
 
         await _context.SaveChangesAsync();
 
