@@ -3,15 +3,14 @@ using System.ComponentModel.DataAnnotations;
 namespace QuotationWritingSystem.Models
 {
     public class CategoryMaterialMaster3
-    {
-        public int Id { get; set; }
-        public int Category1 { get; set; }
-        public int Category2 { get; set; }
-        public int Category3 { get; set; }
-        public string Name { get; set; }= string.Empty;
-        public int SelectFlag { get; set; }
-        public int DetailFlag { get; set; }
-        public bool? Delete { get; set; }
-        public float Material { get; set; }
-    }
+{
+    [Key]
+    public int Id { get; set; } // Primary Key (Auto-Increment)
+
+    public int? Category1 { get; set; } // Parent Category ID
+    public int? Category2 { get; set; } // Subcategory ID
+    public int? Category3 { get; set; } // Tertiary Category ID
+    public string Name { get; set; } =string.Empty;// Material Category Name
+    public bool? Delete { get; set; } // Deletion Status
+}
 }
