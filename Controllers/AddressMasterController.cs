@@ -20,39 +20,6 @@ namespace QuotationWritingSystem.Controllers
             _logger = logger;
         }
 
-       [HttpGet]
-public async Task<ActionResult<IEnumerable<AddressMaster>>> GetAddresses([FromQuery] string city)
-{
-var a = "%" + city + "%";
-_logger.LogInformation("aaa:{a}", a);
-    try
-    {
-        // Validate the city parameter
-        if (string.IsNullOrEmpty(city))
-        {
-            return BadRequest("Prefecture parameter is required.");
-        }
-
-        // SQL query using parameterized LIKE with `FromSqlRaw`
-        var query = "SELECT * FROM AddressMaster WHERE Prefecture LIKE {0}";
-_logger.LogInformation("aaa:{query}", query);
-        
-        // Execute raw SQL query
-        var addresses = await _context.AddressMaster
-            .FromSqlRaw(query, a )  // Parameterized query for LIKE
-            .ToListAsync();  // Execute and fetch results
-
-        // Return the filtered addresses
-        return Ok(addresses);
-    }
-    catch (Exception ex)
-    {
-        _logger.LogError(ex, "Error fetching data for Prefecture: {Prefecture}", city);
-        return StatusCode(500, "Internal Server Error. Please try again later.");
-    }
-}
-
-
     [HttpPost]
     public async Task<ActionResult<AddressMaster>> CreateAddress([FromBody] AddressMaster address)
     {
@@ -60,6 +27,34 @@ _logger.LogInformation("aaa:{query}", query);
         await _context.SaveChangesAsync();
         return CreatedAtAction(nameof(GetAddresses), new { id = address.Id }, address);
     }
+
+    [HttpGet]
+    public async Task<ActionResult<IEnumerable<AddressMaster>>> GetAddresses([FromQuery] string city)
+    {
+    try
+    {
+            _logger.LogInformation("address:{city}", "%"+city+"%");
+        // Validate the city parameter
+        if (string.IsNullOrEmpty(city))
+        {
+            return BadRequest("Prefecture parameter is required.");
+        }
+        // SQL query using parameterized LIKE with `FromSqlRaw`
+        // var query = "SELECT * FROM AddressMaster WHERE Prefecture LIKE {0}";
+        // Execute raw SQL query
+     var addresses = await _context.AddressMaster
+            .Where(a => a.Prefecture.Contains(city))  // Filtering based on Prefecture
+            .ToListAsync();  // Execute the query and get results
+        return Ok(addresses);
+                }
+                catch (Exception ex)
+            {
+            _logger.LogError(ex, "Error fetching data for Prefecture: {Prefecture}", city);
+            return StatusCode(500, "Internal Server Error. Please try again later.");
+            }
+        }
+
+
 
     [HttpPut("{id}")]
     public async Task<IActionResult> UpdateAddress(int id, [FromBody] AddressMaster address)
