@@ -9,30 +9,38 @@ var builder = WebApplication.CreateBuilder(args);
 // Add services to the container.
 builder.Services.AddControllers();
 
-// Configure database connection using the connection string from appsettings.json
+// Get the connection string based on the environment (Development or Production)
+var connectionString = builder.Configuration.GetConnectionString("DefaultConnection");
 builder.Services.AddDbContext<ApplicationDbContext>(options =>
-    options.UseSqlServer(builder.Configuration.GetConnectionString("DefaultConnection"))
+    options.UseSqlServer(connectionString)
 );
 
-// Add CORS policy for React app (replace with actual frontend URL)
+// Set frontend URL dynamically based on environment
+var frontendUrl = builder.Configuration.GetValue<string>("FrontendUrls:Development");
+if (builder.Environment.IsProduction())
+{
+    frontendUrl = builder.Configuration.GetValue<string>("FrontendUrls:Production");
+}
+
 builder.Services.AddCors(options =>
 {
     options.AddPolicy("AllowReactApp", policy =>
     {
-        policy.WithOrigins("http://localhost:5173") // Frontend URL
+        policy.WithOrigins(frontendUrl) // Use the correct frontend URL for each environment
               .AllowAnyHeader()
               .AllowAnyMethod()
-                    .AllowCredentials(); 
+              .AllowCredentials();
     });
 });
 
-// Configure JWT authentication using TokenValidationParameters
+// Configure JWT authentication using TokenValidationParameters (with dynamic settings)
 var jwtKey = builder.Configuration["Jwt:Key"];
 var jwtIssuer = builder.Configuration["Jwt:Issuer"];
+var jwtAudience = builder.Configuration["Jwt:Audience"];
 
-if (string.IsNullOrWhiteSpace(jwtKey) || string.IsNullOrWhiteSpace(jwtIssuer))
+if (string.IsNullOrWhiteSpace(jwtKey) || string.IsNullOrWhiteSpace(jwtIssuer) || string.IsNullOrWhiteSpace(jwtAudience))
 {
-    throw new ArgumentNullException("Jwt:Key or Jwt:Issuer is missing in appsettings.json.");
+    throw new ArgumentNullException("Jwt:Key, Jwt:Issuer, or Jwt:Audience is missing in appsettings.json.");
 }
 
 builder.Services.AddAuthentication(JwtBearerDefaults.AuthenticationScheme)
@@ -45,12 +53,13 @@ builder.Services.AddAuthentication(JwtBearerDefaults.AuthenticationScheme)
             ValidateLifetime = true,
             ValidateIssuerSigningKey = true,
             ValidIssuer = jwtIssuer,
-            ValidAudience = jwtIssuer,
+            ValidAudience = jwtAudience,
             IssuerSigningKey = new SymmetricSecurityKey(Encoding.UTF8.GetBytes(jwtKey))
         };
     });
 
 builder.Services.AddAuthorization();  // Add authorization services
+
 builder.Services.AddLogging(options =>
 {
     options.AddConsole();  // Add console logging
