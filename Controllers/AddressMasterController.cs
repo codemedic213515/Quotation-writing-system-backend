@@ -39,12 +39,11 @@ namespace QuotationWritingSystem.Controllers
         {
             return BadRequest("Prefecture parameter is required.");
         }
-        // SQL query using parameterized LIKE with `FromSqlRaw`
-        // var query = "SELECT * FROM AddressMaster WHERE Prefecture LIKE {0}";
-        // Execute raw SQL query
      var addresses = await _context.AddressMaster
-            .Where(a => a.Prefecture.Contains(city))  // Filtering based on Prefecture
-            .ToListAsync();  // Execute the query and get results
+            .Where(a => a.Prefecture.Contains(city)) 
+               .Select(a => a.City)              
+            .Distinct()   
+            .ToListAsync(); 
         return Ok(addresses);
                 }
                 catch (Exception ex)
@@ -54,7 +53,32 @@ namespace QuotationWritingSystem.Controllers
             }
         }
 
-
+ [HttpGet("postalcode")]
+    public async Task<ActionResult<IEnumerable<AddressMaster>>> GetAddress([FromQuery] int code)
+    {
+    try
+    {
+     
+       var result = await _context.AddressMaster
+        .Where(a => a.ZipCode == code) // Use EF.Functions.Like
+        .Select(a => new
+        {
+            value = a.ZipCode,
+            label = a.Prefecture+" " + a.City+" " + a.Street
+        })
+        .FirstOrDefaultAsync();
+                if (result == null)
+        {
+            return NotFound(new List<object>()); // Return an empty list if no match
+        }
+    return Ok(new List<object> { result });
+                }
+                catch (Exception ex)
+            {
+            _logger.LogError(ex, "Error fetching data for Prefecture: {Prefecture}", code);
+            return StatusCode(500, "Internal Server Error. Please try again later.");
+            }
+        }
 
     [HttpPut("{id}")]
     public async Task<IActionResult> UpdateAddress(int id, [FromBody] AddressMaster address)

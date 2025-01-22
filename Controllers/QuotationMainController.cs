@@ -10,17 +10,33 @@ namespace QuotationWritingSystem.Controllers
 public class QuotationMainController : ControllerBase
 {
     private readonly ApplicationDbContext _context;
-
-    public QuotationMainController(ApplicationDbContext context)
-    {
-        _context = context;
-    }
+      private readonly ILogger<QuotationMainController> _logger;
+    public QuotationMainController(ApplicationDbContext context, ILogger<QuotationMainController> logger)
+        {
+            _context = context;
+            _logger = logger;
+        }
 
     [HttpGet]
     public async Task<ActionResult<IEnumerable<QuotationMain>>> GetQuotationMains()
     {
         return await _context.QuotationMains.ToListAsync();
     }
+ [HttpGet("count")]
+    public async Task<ActionResult<IEnumerable<QuotationMain>>> GetQuotationMainCount()
+    {
+        try
+    {
+        var count = await _context.QuotationMains.CountAsync();
+        return Ok(  count );
+    }
+    catch (Exception ex)
+    {
+        _logger.LogError(ex, "Error fetching QuotationMain count");
+        return StatusCode(500, "Internal Server Error");
+    }
+    }
+
 
     [HttpGet("{id}")]
     public async Task<ActionResult<QuotationMain>> GetQuotationMain(int id)
