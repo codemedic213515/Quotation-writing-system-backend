@@ -17,11 +17,28 @@ public class CategoryMaterialMaster3Controller : ControllerBase
         _context = context;
     }
 
-    [HttpGet]
-    public async Task<ActionResult<IEnumerable<CategoryMaterialMaster3>>> GetCategoryMaterialMasters()
+[HttpGet]
+public async Task<ActionResult<IEnumerable<CategoryMaterialMaster3>>> GetCategoryMaterialMasters(
+    [FromQuery] int category1, 
+    [FromQuery] int category2)
+{
+    if (category1 <= 0 || category2 <= 0)
     {
-        return await _context.CategoryMaterialMasters3.ToListAsync();
+        return BadRequest("Invalid category1 or category2 value.");
     }
+
+    var filteredMaterials = await _context.CategoryMaterialMasters3
+        .Where(m => m.Category1 == category1 && m.Category2 == category2)
+        .ToListAsync();
+
+    if (!filteredMaterials.Any())
+    {
+        return NotFound("No materials found for the given categories.");
+    }
+
+    return Ok(filteredMaterials);
+}
+
 
     [HttpGet("{id}")]
     public async Task<ActionResult<CategoryMaterialMaster3>> GetCategoryMaterialMaster(int id)

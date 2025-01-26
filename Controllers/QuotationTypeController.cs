@@ -2,6 +2,7 @@ using Microsoft.AspNetCore.Mvc;
 using Microsoft.EntityFrameworkCore;
 using QuotationWritingSystem.Data;
 using QuotationWritingSystem.Models;
+using Newtonsoft.Json;
 using System.Threading.Tasks;
 
 namespace QuotationWritingSystem.Controllers
@@ -10,12 +11,13 @@ namespace QuotationWritingSystem.Controllers
 public class QuotationTypeController : ControllerBase
 {
     private readonly ApplicationDbContext _context;
+private readonly ILogger<QuotationTypeController> _logger;
 
-    public QuotationTypeController(ApplicationDbContext context)
-    {
-        _context = context;
-    }
-
+    public QuotationTypeController(ApplicationDbContext context, ILogger<QuotationTypeController> logger)
+        {
+            _context = context;
+            _logger = logger;
+        }
     [HttpGet]
     public async Task<ActionResult<IEnumerable<QuotationType>>> GetQuotationTypes()
     {
@@ -32,28 +34,38 @@ public class QuotationTypeController : ControllerBase
         }
         return quotationType;
     }
-
-    [HttpPost]
-    public async Task<ActionResult<QuotationType>> CreateQuotationType([FromBody] QuotationType quotationType)
+  
+[HttpPost]
+public async Task<ActionResult<QuotationType>> CreateQuotationType([FromBody] QuotationType quotationType)
+{
+    if (quotationType == null)
     {
-        _context.QuotationTypes.Add(quotationType);
-        await _context.SaveChangesAsync();
-        return CreatedAtAction(nameof(GetQuotationType), new { id = quotationType.Id }, quotationType);
+        return BadRequest("Invalid quotation type data.");
     }
 
-    [HttpPut("{id}")]
-    public async Task<IActionResult> UpdateQuotationType(int id, [FromBody] QuotationType quotationType)
-    {
-        if (id != quotationType.Id)
-        {
-            return BadRequest();
-        }
+    _logger.LogInformation("Received quotationType: {@quotationType}", quotationType);
 
-        _context.Entry(quotationType).State = EntityState.Modified;
+    // Ensure default values if they are not provided
+    quotationType.Delete ??= false;  // Default value for Delete
+    quotationType.RemovalRate ??= 0.0; // Default value for RemovalRate
+
+    try
+    {
+        await _context.QuotationTypes.AddAsync(quotationType);
         await _context.SaveChangesAsync();
 
-        return NoContent();
+        return Ok(quotationType);
     }
+    catch (Exception ex)
+    {
+        _logger.LogError("Error saving quotationType: {Message}", ex.Message);
+        return StatusCode(StatusCodes.Status500InternalServerError, 
+            new { message = "Internal server error", error = ex.Message });
+    }
+}
+
+
+
 
     [HttpDelete("{id}")]
     public async Task<IActionResult> DeleteQuotationType(int id)
