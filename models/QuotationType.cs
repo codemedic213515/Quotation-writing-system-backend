@@ -12,7 +12,7 @@ namespace QuotationWritingSystem.Models
     public string Category2 { get; set; } =string.Empty;// Category Level 2
     public string Category3 { get; set; }=string.Empty; // Category Level 3
     public string Category4 { get; set; }=string.Empty; // Category Level 4
-    public double? RemovalRate { get; set; } // Removal Rate
+    public double? RemovalRate { get; set; } = 0.0;// Removal Rate
     public bool? Delete { get; set; } // Deletion Status
 }
 }

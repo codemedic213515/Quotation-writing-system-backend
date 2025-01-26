@@ -11,17 +11,29 @@ namespace QuotationWritingSystem.Controllers
 public class CategoryMaterialMaster2Controller : ControllerBase
 {
     private readonly ApplicationDbContext _context;
-
-    public CategoryMaterialMaster2Controller(ApplicationDbContext context)
+    private readonly ILogger<CategoryMaterialMaster2Controller> _logger;
+    public CategoryMaterialMaster2Controller(ApplicationDbContext context, ILogger<CategoryMaterialMaster2Controller> logger)
     {
         _context = context;
+        _logger = logger;
     }
 
-    [HttpGet]
-    public async Task<ActionResult<IEnumerable<CategoryMaterialMaster2>>> GetCategoryMaterialMasters()
+   [HttpGet]
+public async Task<ActionResult<IEnumerable<CategoryMaterialMaster2>>> GetCategoryMaterialMasters([FromQuery] int category1)
+{
+
+    var filteredMaterials = await _context.CategoryMaterialMasters2
+        .Where(m => m.Category1 == category1)
+        .ToListAsync();
+
+    if (!filteredMaterials.Any())
     {
-        return await _context.CategoryMaterialMasters2.ToListAsync();
+        return NotFound("No materials found for the given category1.");
     }
+
+    return Ok(filteredMaterials);
+}
+
 
     [HttpGet("{id}")]
     public async Task<ActionResult<CategoryMaterialMaster2>> GetCategoryMaterialMaster(int id)

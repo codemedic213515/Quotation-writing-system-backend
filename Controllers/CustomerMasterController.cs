@@ -53,12 +53,32 @@ public async Task<ActionResult<IEnumerable<CustomerMaster>>> GetCustomerMasterBy
     }
 
     [HttpPost]
-    public async Task<ActionResult<CustomerMaster>> CreateCustomerMaster([FromBody] CustomerMaster customer)
+public async Task<ActionResult<CustomerMaster>> CreateCustomerMaster([FromBody] CustomerMaster customer)
+{
+    // Check for duplicates based on Phone, Name, Email, Group, Fax, Hp, and Address
+    var existingCustomer = await _context.CustomerMasters
+        .FirstOrDefaultAsync(c => 
+            c.Phone == customer.Phone || 
+            c.Name == customer.Name || 
+            c.Email == customer.Email || 
+            c.Group == customer.Group || 
+            c.Fax == customer.Fax || 
+            c.Hp == customer.Hp || 
+            c.Address == customer.Address);
+
+    if (existingCustomer != null)
     {
-        _context.CustomerMasters.Add(customer);
-        await _context.SaveChangesAsync();
-        return CreatedAtAction(nameof(GetCustomerMaster), new { id = customer.Id }, customer);
+        // Return 400 Bad Request if a duplicate is found with an appropriate error message
+        return BadRequest("A customer with the same Phone, Name, Email, Group, Fax, Hp, or Address already exists.");
     }
+
+    // Add the new customer if no duplicates are found
+    _context.CustomerMasters.Add(customer);
+    await _context.SaveChangesAsync();
+
+    // Return 200 OK with the created customer object
+    return Ok(customer);
+}
 
     [HttpPut("{id}")]
     public async Task<IActionResult> UpdateCustomerMaster(int id, [FromBody] CustomerMaster customer)

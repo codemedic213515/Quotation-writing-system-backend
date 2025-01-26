@@ -1,0 +1,47 @@
+# Visual Studio
+.vs/
+*.sln
+*.user
+*.suo
+*.userprefs
+
+# Build results
+[Dd]ebug/
+[Rr]elease/
+x64/
+x86/
+[Aa][Rr][Mm]/
+[Bb]in/
+[Oo]bj/
+
+# NuGet packages
+**/packages/*
+!.nuget/
+!**/packages/build/
+!**/packages/build/PackageName/
+
+# ASP.NET Scaffolding
+ScaffoldingReadMe.txt
+
+# User-specific files
+*.dbmdl
+*.dbproj.schemaview
+
+# Logs
+*.log
+
+# Visual Studio Code
+.vscode/
+
+# Rider
+.idea/
+*.sln.iml
+
+# Other
+*.cache
+*.pdb
+*.mdb
+*.ilk
+*.idb
+*.opendb
+*.tlog

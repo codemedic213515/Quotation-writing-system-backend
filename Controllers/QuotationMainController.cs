@@ -52,24 +52,52 @@ public class QuotationMainController : ControllerBase
     [HttpPost]
     public async Task<ActionResult<QuotationMain>> CreateQuotationMain([FromBody] QuotationMain quotationMain)
     {
+
+         var existingQuotation = await _context.QuotationMains
+        .FirstOrDefaultAsync(c => 
+            c.Code == quotationMain.Code );
+
+    if (existingQuotation != null)
+    {
+        // Return 400 Bad Request if a duplicate is found with an appropriate error message
+        return BadRequest("A Quotation with the same Code is already exists.");
+    }
+
         _context.QuotationMains.Add(quotationMain);
         await _context.SaveChangesAsync();
-        return CreatedAtAction(nameof(GetQuotationMain), new { id = quotationMain.Id }, quotationMain);
+        return Ok( quotationMain);
     }
 
-    [HttpPut("{id}")]
-    public async Task<IActionResult> UpdateQuotationMain(int id, [FromBody] QuotationMain quotationMain)
+[HttpPut("{code}")]
+public async Task<IActionResult> UpdateQuotationMain(string code, [FromBody] QuotationMain quotationMain)
+{
+    if (code != quotationMain.Code)
     {
-        if (id != quotationMain.Id)
-        {
-            return BadRequest();
-        }
-
-        _context.Entry(quotationMain).State = EntityState.Modified;
-        await _context.SaveChangesAsync();
-
-        return NoContent();
+        // Return 400 if the provided 'code' in the URL doesn't match the 'code' in the request body
+        return BadRequest("Code mismatch between URL and request body.");
     }
+
+    // Fetch the existing QuotationMain by code
+    var existingQuotation = await _context.QuotationMains.FirstOrDefaultAsync(q => q.Code == quotationMain.Code);
+    if (existingQuotation == null)
+    {
+        // Return 404 if no existing quotation is found with the provided 'code'
+        return NotFound($"Quotation with code {code} not found.");
+    }
+
+    // Update only the properties of the existing quotation that need to be changed
+    existingQuotation.Purpose = quotationMain.Purpose;
+    existingQuotation.Square = quotationMain.Square;
+    existingQuotation.Standard = quotationMain.Standard;
+
+    // Update other properties as needed...
+
+    // Save the changes to the database
+    await _context.SaveChangesAsync();
+
+    // Return the updated quotation object with a 200 OK status
+    return Ok(existingQuotation);
+}
 
     [HttpDelete("{id}")]
     public async Task<IActionResult> DeleteQuotationMain(int id)
