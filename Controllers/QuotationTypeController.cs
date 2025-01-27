@@ -18,11 +18,30 @@ private readonly ILogger<QuotationTypeController> _logger;
             _context = context;
             _logger = logger;
         }
-    [HttpGet]
-    public async Task<ActionResult<IEnumerable<QuotationType>>> GetQuotationTypes()
+ [HttpGet]
+public async Task<ActionResult<IEnumerable<QuotationType>>> GetQuotationTypes([FromQuery] string number)
+{
+    // Check if 'number' is provided
+    if (string.IsNullOrWhiteSpace(number))
     {
-        return await _context.QuotationTypes.ToListAsync();
+        return BadRequest("number is required.");
     }
+
+    // Find existing quotation types by the given 'number'
+    var existingQuotationTypes = await _context.QuotationTypes
+        .Where(q => q.Number == number)  // Filter based on the 'number'
+        .ToListAsync();
+
+    // If no data is found, return a 404 (Not Found)
+    if (existingQuotationTypes.Count == 0)
+    {
+        return NotFound("No quotation types found for the given number.");
+    }
+
+    // Return the filtered list of quotation types
+    return Ok(existingQuotationTypes);
+}
+
 
     [HttpGet("{id}")]
     public async Task<ActionResult<QuotationType>> GetQuotationType(int id)
