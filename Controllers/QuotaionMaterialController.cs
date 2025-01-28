@@ -34,12 +34,19 @@ public class QuotationMaterialController : ControllerBase
     }
 
     [HttpPost]
-    public async Task<ActionResult<QuotationMaterial>> CreateQuotationMaterial([FromBody] QuotationMaterial quotationMaterial)
+public async Task<ActionResult> CreateQuotationMaterials([FromBody] List<QuotationMaterial> quotationMaterials)
+{
+    if (quotationMaterials == null || !quotationMaterials.Any())
     {
-        _context.QuotationMaterials.Add(quotationMaterial);
-        await _context.SaveChangesAsync();
-        return CreatedAtAction(nameof(GetQuotationMaterial), new { id = quotationMaterial.Id }, quotationMaterial);
+        return BadRequest(new { error = "No materials provided." });
     }
+
+    _context.QuotationMaterials.AddRange(quotationMaterials);
+    await _context.SaveChangesAsync();
+
+    return Ok(new { message = "Materials saved successfully.", data = quotationMaterials });
+}
+
 
     [HttpPut("{id}")]
     public async Task<IActionResult> UpdateQuotationMaterial(int id, [FromBody] QuotationMaterial quotationMaterial)
