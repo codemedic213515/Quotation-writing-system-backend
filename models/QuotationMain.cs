@@ -17,5 +17,6 @@ namespace QuotationWritingSystem.Models
     public string Square { get; set; }  =string.Empty;// Square Measurement
     public string Standard { get; set; }  =string.Empty;// Standard Description
     public bool? Delete { get; set; } // Deletion Status
+    public DateTime CreatedAt { get; set; } = DateTime.Now; // Creation Date
 }
 }

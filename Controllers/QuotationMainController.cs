@@ -17,11 +17,68 @@ public class QuotationMainController : ControllerBase
             _logger = logger;
         }
 
-    [HttpGet]
-    public async Task<ActionResult<IEnumerable<QuotationMain>>> GetQuotationMains()
+// In your controller (e.g., QuotationMainController.cs)
+[HttpGet("users")]
+public async Task<ActionResult<IEnumerable<string>>> GetUsers()
+{
+    var users = await _context.QuotationMains
+        .Where(q => !string.IsNullOrEmpty(q.Creater)) // Ensure no null or empty usernames
+        .Select(q => q.Creater) // Assuming 'Creater' field holds the username
+        .Distinct() // Get distinct usernames
+        .ToListAsync();
+
+    return Ok(users);
+}
+
+
+   [HttpGet]
+  
+public async Task<ActionResult> GetQuotationMains(
+    [FromQuery] int page = 1,
+    [FromQuery] int pageSize = 10, // Default to 10 if not provided
+    [FromQuery] string? creater = null,
+    [FromQuery] string? code = null,
+    [FromQuery] DateTime? createDate = null)
+{
+    // Base query
+    var query = _context.QuotationMains.AsQueryable();
+
+    // Apply filters
+    if (!string.IsNullOrWhiteSpace(creater))
     {
-        return await _context.QuotationMains.ToListAsync();
+        query = query.Where(q => q.Creater.Contains(creater));
     }
+
+    if (!string.IsNullOrWhiteSpace(code))
+    {
+        query = query.Where(q => q.Code.Contains(code));
+    }
+
+    if (createDate.HasValue)
+    {
+        query = query.Where(q => q.CreatedAt.Date == createDate.Value.Date);
+    }
+
+    // Total count before pagination
+    var totalRecords = await query.CountAsync();
+
+    // Apply pagination
+    var quotationMains = await query
+        .OrderBy(q => q.Id) // Order by ID or other relevant field
+        .Skip((page - 1) * pageSize)
+        .Take(pageSize)
+        .ToListAsync();
+
+    // Return paginated and filtered response
+    return Ok(new
+    {
+        Data = quotationMains,
+        TotalRecords = totalRecords,
+        Page = page,
+        PageSize = pageSize
+    });
+}
+
  [HttpGet("count")]
     public async Task<ActionResult<IEnumerable<QuotationMain>>> GetQuotationMainCount()
     {
