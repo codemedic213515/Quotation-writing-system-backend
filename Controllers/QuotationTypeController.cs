@@ -86,19 +86,69 @@ public async Task<ActionResult<QuotationType>> CreateQuotationType([FromBody] Qu
 
 
 
-    [HttpDelete("{id}")]
-    public async Task<IActionResult> DeleteQuotationType(int id)
+[HttpDelete("{id}")]
+public async Task<IActionResult> DeleteQuotationType(int id)
+{
+    var quotationType = await _context.QuotationTypes.FindAsync(id);
+    if (quotationType == null)
     {
-        var quotationType = await _context.QuotationTypes.FindAsync(id);
-        if (quotationType == null)
-        {
-            return NotFound();
-        }
+        return NotFound();
+    }
 
-        _context.QuotationTypes.Remove(quotationType);
+    _context.QuotationTypes.Remove(quotationType);
+    await _context.SaveChangesAsync();
+
+    return NoContent();
+}
+[HttpPost("save")]
+public async Task<IActionResult> SaveQuotationData([FromBody] QuotationSaveRequest request)
+{
+    if (request == null || string.IsNullOrWhiteSpace(request.Number) || request.CleanedData == null)
+    {
+        return BadRequest("Invalid request data.");
+    }
+
+    try
+    {
+        // Step 1: Remove Existing Data for the Given Number
+        var existingRecords = _context.QuotationTypes.Where(q => q.Number == request.Number);
+        _context.QuotationTypes.RemoveRange(existingRecords);
+        await _context.SaveChangesAsync(); // Save changes before inserting new records
+
+        // Step 2: Insert New Data
+        var newRecords = request.CleanedData.Select(item => new QuotationType
+        {
+            Number = request.Number,
+            Category1 = item.Category1,
+            Category2 = item.Category2,
+            Category3 = item.Category3,
+            Category4 = item.Category4 ?? "", // Default to empty string if null
+            RemovalRate = item.RemovalRate ?? 0,
+            Delete = false // Default to active
+        });
+
+        await _context.QuotationTypes.AddRangeAsync(newRecords);
         await _context.SaveChangesAsync();
 
-        return NoContent();
+        return Ok(new { message = "Data saved successfully!" });
+    }
+    catch (Exception ex)
+    {
+        return StatusCode(500, $"Internal server error: {ex.Message}");
     }
 }
+}
+}
+public class QuotationSaveRequest
+{
+    public string Number { get; set; }=string.Empty;
+    public List<QuotationTypeDto> CleanedData { get; set; }
+}
+
+public class QuotationTypeDto
+{
+    public string Category1 { get; set; }=string.Empty;    public string Category2 { get; set; }=string.Empty;
+    public string Category3 { get; set; }=string.Empty;
+    public string Category4 { get; set; }=string.Empty;
+    public double? RemovalRate { get; set; }
 }
