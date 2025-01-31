@@ -6,7 +6,7 @@ using Microsoft.EntityFrameworkCore.Migrations;
 namespace Backend.Migrations
 {
     /// <inheritdoc />
-    public partial class InitialCreate : Migration
+    public partial class AddAutoIncrementToId : Migration
     {
         /// <inheritdoc />
         protected override void Up(MigrationBuilder migrationBuilder)
@@ -45,6 +45,31 @@ namespace Backend.Migrations
                 constraints: table =>
                 {
                     table.PrimaryKey("PK_AddressMaster", x => x.Id);
+                });
+
+            migrationBuilder.CreateTable(
+                name: "CalculationData",
+                columns: table => new
+                {
+                    Id = table.Column<int>(type: "int", nullable: false)
+                        .Annotation("SqlServer:Identity", "1, 1"),
+                    PipeAccessoryRate = table.Column<int>(type: "int", nullable: false),
+                    PipeSupportRate = table.Column<int>(type: "int", nullable: false),
+                    CableRackAccessoryRate = table.Column<int>(type: "int", nullable: false),
+                    CableRackSupportRate = table.Column<int>(type: "int", nullable: false),
+                    RacewayAccessoryRate = table.Column<int>(type: "int", nullable: false),
+                    RacewaySupportRate = table.Column<int>(type: "int", nullable: false),
+                    CableAdditionalRate = table.Column<int>(type: "int", nullable: false),
+                    LightingAdditionalRate = table.Column<int>(type: "int", nullable: false),
+                    PanelAdditionalRate = table.Column<int>(type: "int", nullable: false),
+                    PerformAuxiliaryWorks = table.Column<bool>(type: "bit", nullable: false),
+                    AuxiliaryWorkRate = table.Column<int>(type: "int", nullable: false),
+                    OverheadRate = table.Column<int>(type: "int", nullable: false),
+                    CostRate = table.Column<int>(type: "int", nullable: false)
+                },
+                constraints: table =>
+                {
+                    table.PrimaryKey("PK_CalculationData", x => x.Id);
                 });
 
             migrationBuilder.CreateTable(
@@ -208,6 +233,31 @@ namespace Backend.Migrations
                 });
 
             migrationBuilder.CreateTable(
+                name: "QuotationCalc",
+                columns: table => new
+                {
+                    Id = table.Column<int>(type: "int", nullable: false)
+                        .Annotation("SqlServer:Identity", "1, 1"),
+                    TubeNetRate = table.Column<decimal>(type: "decimal(18,2)", nullable: false),
+                    TubeReplenishmentRate = table.Column<decimal>(type: "decimal(18,2)", nullable: false),
+                    CableNetRate = table.Column<decimal>(type: "decimal(18,2)", nullable: false),
+                    CableReplenishmentRate = table.Column<decimal>(type: "decimal(18,2)", nullable: false),
+                    Rank = table.Column<string>(type: "nvarchar(max)", nullable: false),
+                    LaborRateA = table.Column<decimal>(type: "decimal(18,2)", nullable: false),
+                    LaborRateB = table.Column<decimal>(type: "decimal(18,2)", nullable: false),
+                    SiteMiscellRate = table.Column<decimal>(type: "decimal(18,2)", nullable: false),
+                    MiscellRate = table.Column<decimal>(type: "decimal(18,2)", nullable: false),
+                    Minority = table.Column<bool>(type: "bit", nullable: false),
+                    LaborBasisRate = table.Column<decimal>(type: "decimal(18,2)", nullable: false),
+                    ABMethod = table.Column<bool>(type: "bit", nullable: false),
+                    Number = table.Column<string>(type: "nvarchar(max)", nullable: false)
+                },
+                constraints: table =>
+                {
+                    table.PrimaryKey("PK_QuotationCalc", x => x.Id);
+                });
+
+            migrationBuilder.CreateTable(
                 name: "QuotationMain",
                 columns: table => new
                 {
@@ -222,7 +272,8 @@ namespace Backend.Migrations
                     Purpose = table.Column<string>(type: "nvarchar(max)", nullable: false),
                     Square = table.Column<string>(type: "nvarchar(max)", nullable: false),
                     Standard = table.Column<string>(type: "nvarchar(max)", nullable: false),
-                    Delete = table.Column<bool>(type: "bit", nullable: true)
+                    Delete = table.Column<bool>(type: "bit", nullable: true),
+                    CreatedAt = table.Column<DateTime>(type: "datetime2", nullable: false)
                 },
                 constraints: table =>
                 {
@@ -265,6 +316,7 @@ namespace Backend.Migrations
                     Category3 = table.Column<string>(type: "nvarchar(max)", nullable: false),
                     Category4 = table.Column<string>(type: "nvarchar(max)", nullable: false),
                     RemovalRate = table.Column<double>(type: "float", nullable: true),
+                    Calculate = table.Column<bool>(type: "bit", nullable: true),
                     Delete = table.Column<bool>(type: "bit", nullable: true)
                 },
                 constraints: table =>
@@ -347,6 +399,9 @@ namespace Backend.Migrations
                 name: "AddressMaster");
 
             migrationBuilder.DropTable(
+                name: "CalculationData");
+
+            migrationBuilder.DropTable(
                 name: "CategoryMaterialMaster_1");
 
             migrationBuilder.DropTable(
@@ -369,6 +424,9 @@ namespace Backend.Migrations
 
             migrationBuilder.DropTable(
                 name: "PrefectureMaster");
+
+            migrationBuilder.DropTable(
+                name: "QuotationCalc");
 
             migrationBuilder.DropTable(
                 name: "QuotationMain");

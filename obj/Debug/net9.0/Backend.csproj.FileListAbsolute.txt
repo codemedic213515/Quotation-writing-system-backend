@@ -500,5 +500,4 @@ E:\@Git\@CodeMedic0911\Quotation-writing-system-backend\obj\Debug\net9.0\refint\
 E:\@Git\@CodeMedic0911\Quotation-writing-system-backend\obj\Debug\net9.0\Backend.pdb
 E:\@Git\@CodeMedic0911\Quotation-writing-system-backend\obj\Debug\net9.0\Backend.genruntimeconfig.cache
 E:\@Git\@CodeMedic0911\Quotation-writing-system-backend\obj\Debug\net9.0\ref\Backend.dll
-E:\@Git\@CodeMedic0911\Quotation-writing-system-backend\bin\Debug\net9.0\appsettings.Development.json
 E:\@Git\@CodeMedic0911\Quotation-writing-system-backend\bin\Debug\net9.0\Newtonsoft.Json.dll

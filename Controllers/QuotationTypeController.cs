@@ -139,16 +139,17 @@ public async Task<IActionResult> SaveQuotationData([FromBody] QuotationSaveReque
 }
 }
 }
-public class QuotationSaveRequest
-{
-    public string Number { get; set; }=string.Empty;
-    public List<QuotationTypeDto> CleanedData { get; set; }
-}
+  public class QuotationSaveRequest
+    {
+        public string Number { get; set; } = string.Empty; // Ensure it's initialized
+        public List<QuotationTypeDto> CleanedData { get; set; } = new List<QuotationTypeDto>(); // Initialize to avoid null
+    }
 
-public class QuotationTypeDto
-{
-    public string Category1 { get; set; }=string.Empty;    public string Category2 { get; set; }=string.Empty;
-    public string Category3 { get; set; }=string.Empty;
-    public string Category4 { get; set; }=string.Empty;
-    public double? RemovalRate { get; set; }
-}
+  public class QuotationTypeDto
+    {
+        public string Category1 { get; set; } = string.Empty; // Initialize to avoid null
+        public string Category2 { get; set; } = string.Empty; // Initialize to avoid null
+        public string Category3 { get; set; } = string.Empty; // Initialize to avoid null
+        public string Category4 { get; set; } = string.Empty; // Initialize to avoid null
+        public double? RemovalRate { get; set; } // Nullable
+    }
