@@ -23,7 +23,8 @@ namespace QuotationWritingSystem.Data
         public DbSet<UnitMaster> UnitMasters { get; set; }
         public DbSet<Users> Users { get; set; }
         public DbSet<YearMaster> YearMasters { get; set; }
-
+        public DbSet<CalculationData> CalculationDatas {get; set;}
+public DbSet<QuotationCalc> QuotationCalcs { get; set; }
         // Constructor that accepts DbContextOptions and passes it to the base class
         public ApplicationDbContext(DbContextOptions<ApplicationDbContext> options) 
             : base(options) 
@@ -41,7 +42,7 @@ namespace QuotationWritingSystem.Data
 
         // Customize model creation if needed
         protected override void OnModelCreating(ModelBuilder modelBuilder)
-        {
+        {    
             modelBuilder.Entity<ABMaterialMaster>().ToTable("ABMaterialMaster");
             modelBuilder.Entity<AddressMaster>().ToTable("AddressMaster");
             modelBuilder.Entity<CategoryMaterialMaster1>().ToTable("CategoryMaterialMaster_1");
@@ -59,6 +60,9 @@ namespace QuotationWritingSystem.Data
             modelBuilder.Entity<UnitMaster>().ToTable("UnitMaster");
             modelBuilder.Entity<Users>().ToTable("Users");
             modelBuilder.Entity<YearMaster>().ToTable("YearMaster");
+            modelBuilder.Entity<CalculationData>().ToTable("CalculationData");
+            modelBuilder.Entity<QuotationCalc>().ToTable("QuotationCalc");
+        
         }
     }
 }

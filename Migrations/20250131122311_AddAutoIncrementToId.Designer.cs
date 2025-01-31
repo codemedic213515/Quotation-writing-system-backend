@@ -12,8 +12,8 @@ using QuotationWritingSystem.Data;
 namespace Backend.Migrations
 {
     [DbContext(typeof(ApplicationDbContext))]
-    [Migration("20250121162520_InitialCreate")]
-    partial class InitialCreate
+    [Migration("20250131122311_AddAutoIncrementToId")]
+    partial class AddAutoIncrementToId
     {
         /// <inheritdoc />
         protected override void BuildTargetModel(ModelBuilder modelBuilder)
@@ -91,6 +91,58 @@ namespace Backend.Migrations
                     b.HasKey("Id");
 
                     b.ToTable("AddressMaster", (string)null);
+                });
+
+            modelBuilder.Entity("QuotationWritingSystem.Models.CalculationData", b =>
+                {
+                    b.Property<int>("Id")
+                        .ValueGeneratedOnAdd()
+                        .HasColumnType("int");
+
+                    SqlServerPropertyBuilderExtensions.UseIdentityColumn(b.Property<int>("Id"));
+
+                    b.Property<int>("AuxiliaryWorkRate")
+                        .HasColumnType("int");
+
+                    b.Property<int>("CableAdditionalRate")
+                        .HasColumnType("int");
+
+                    b.Property<int>("CableRackAccessoryRate")
+                        .HasColumnType("int");
+
+                    b.Property<int>("CableRackSupportRate")
+                        .HasColumnType("int");
+
+                    b.Property<int>("CostRate")
+                        .HasColumnType("int");
+
+                    b.Property<int>("LightingAdditionalRate")
+                        .HasColumnType("int");
+
+                    b.Property<int>("OverheadRate")
+                        .HasColumnType("int");
+
+                    b.Property<int>("PanelAdditionalRate")
+                        .HasColumnType("int");
+
+                    b.Property<bool>("PerformAuxiliaryWorks")
+                        .HasColumnType("bit");
+
+                    b.Property<int>("PipeAccessoryRate")
+                        .HasColumnType("int");
+
+                    b.Property<int>("PipeSupportRate")
+                        .HasColumnType("int");
+
+                    b.Property<int>("RacewayAccessoryRate")
+                        .HasColumnType("int");
+
+                    b.Property<int>("RacewaySupportRate")
+                        .HasColumnType("int");
+
+                    b.HasKey("Id");
+
+                    b.ToTable("CalculationData", (string)null);
                 });
 
             modelBuilder.Entity("QuotationWritingSystem.Models.CategoryMaterialMaster1", b =>
@@ -412,6 +464,60 @@ namespace Backend.Migrations
                     b.ToTable("PrefectureMaster", (string)null);
                 });
 
+            modelBuilder.Entity("QuotationWritingSystem.Models.QuotationCalc", b =>
+                {
+                    b.Property<int>("Id")
+                        .ValueGeneratedOnAdd()
+                        .HasColumnType("int");
+
+                    SqlServerPropertyBuilderExtensions.UseIdentityColumn(b.Property<int>("Id"));
+
+                    b.Property<bool>("ABMethod")
+                        .HasColumnType("bit");
+
+                    b.Property<decimal>("CableNetRate")
+                        .HasColumnType("decimal(18,2)");
+
+                    b.Property<decimal>("CableReplenishmentRate")
+                        .HasColumnType("decimal(18,2)");
+
+                    b.Property<decimal>("LaborBasisRate")
+                        .HasColumnType("decimal(18,2)");
+
+                    b.Property<decimal>("LaborRateA")
+                        .HasColumnType("decimal(18,2)");
+
+                    b.Property<decimal>("LaborRateB")
+                        .HasColumnType("decimal(18,2)");
+
+                    b.Property<bool>("Minority")
+                        .HasColumnType("bit");
+
+                    b.Property<decimal>("MiscellRate")
+                        .HasColumnType("decimal(18,2)");
+
+                    b.Property<string>("Number")
+                        .IsRequired()
+                        .HasColumnType("nvarchar(max)");
+
+                    b.Property<string>("Rank")
+                        .IsRequired()
+                        .HasColumnType("nvarchar(max)");
+
+                    b.Property<decimal>("SiteMiscellRate")
+                        .HasColumnType("decimal(18,2)");
+
+                    b.Property<decimal>("TubeNetRate")
+                        .HasColumnType("decimal(18,2)");
+
+                    b.Property<decimal>("TubeReplenishmentRate")
+                        .HasColumnType("decimal(18,2)");
+
+                    b.HasKey("Id");
+
+                    b.ToTable("QuotationCalc", (string)null);
+                });
+
             modelBuilder.Entity("QuotationWritingSystem.Models.QuotationMain", b =>
                 {
                     b.Property<int>("Id")
@@ -427,6 +533,9 @@ namespace Backend.Migrations
                     b.Property<string>("Code")
                         .IsRequired()
                         .HasColumnType("nvarchar(max)");
+
+                    b.Property<DateTime>("CreatedAt")
+                        .HasColumnType("datetime2");
 
                     b.Property<string>("Creater")
                         .IsRequired()
@@ -530,6 +639,9 @@ namespace Backend.Migrations
                         .HasColumnType("int");
 
                     SqlServerPropertyBuilderExtensions.UseIdentityColumn(b.Property<int>("Id"));
+
+                    b.Property<bool?>("Calculate")
+                        .HasColumnType("bit");
 
                     b.Property<string>("Category1")
                         .IsRequired()
