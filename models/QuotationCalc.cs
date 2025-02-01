@@ -15,12 +15,12 @@ namespace QuotationWritingSystem.Models
         public decimal CableReplenishmentRate { get; set; }
 
         public string Rank { get; set; } = string.Empty; // Use string instead of nvarchar(max)
-        public decimal LaborRateA { get; set; }
-        public decimal LaborRateB { get; set; }
+        public int LaborCostA { get; set; }
+        public int LaborCostB { get; set; }
 
         public decimal SiteMiscellRate { get; set; }
         public decimal MiscellRate { get; set; }
-        public bool Minority { get; set; }
+        public int Minority { get; set; }
 
         public decimal LaborBasisRate { get; set; }
         public bool ABMethod { get; set; }

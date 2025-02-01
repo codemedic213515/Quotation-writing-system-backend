@@ -27,18 +27,30 @@ namespace QuotationWritingSystem.Controllers
         }
 
         // GET: api/QuotationCalc/5
-        [HttpGet("{id}")]
-        public async Task<ActionResult<QuotationCalc>> GetQuotationCalc(int id)
+    [HttpGet("{id}")]
+public async Task<ActionResult<QuotationCalc>> GetQuotationCalc(string id)
+{
+    // Try to fetch the QuotationCalc from the database by ID
+    var quotationCalc = await _context.QuotationCalcs
+        .Where(q => q.Number == id) // Ensure we are looking by the correct field, like `Number` or `Id`
+        .FirstOrDefaultAsync();
+
+    // If no data is found, return a default response with 100% for rates
+    if (quotationCalc == null)
+    {
+        return Ok(new QuotationCalc
         {
-            var quotationCalc = await _context.QuotationCalcs.FindAsync(id);
+            TubeNetRate = 100, // Default value for 電線管
+            TubeReplenishmentRate = 100, // Default value for 電線管
+            CableNetRate = 100, // Default value for 電線・ケーブル
+            CableReplenishmentRate = 100 // Default value for 電線・ケーブル
+        });
+    }
 
-            if (quotationCalc == null)
-            {
-                return NotFound();
-            }
+    // If data is found, return the existing QuotationCalc object
+    return Ok(quotationCalc);
+}
 
-            return quotationCalc;
-        }
 
         // PUT: api/QuotationCalc/5
         [HttpPut("{id}")]
@@ -96,11 +108,11 @@ public async Task<ActionResult<QuotationCalc>> PostQuotationCalc(QuotationCalc q
         if (!string.IsNullOrEmpty(quotationCalc.Rank))
             existingQuotation.Rank = quotationCalc.Rank;
 
-        if (quotationCalc.LaborRateA != default)
-            existingQuotation.LaborRateA = quotationCalc.LaborRateA;
+        if (quotationCalc.LaborCostA != default)
+            existingQuotation.LaborCostA = quotationCalc.LaborCostA;
 
-        if (quotationCalc.LaborRateB != default)
-            existingQuotation.LaborRateB = quotationCalc.LaborRateB;
+        if (quotationCalc.LaborCostB != default)
+            existingQuotation.LaborCostB = quotationCalc.LaborCostB;
 
         if (quotationCalc.SiteMiscellRate != default)
             existingQuotation.SiteMiscellRate = quotationCalc.SiteMiscellRate;
