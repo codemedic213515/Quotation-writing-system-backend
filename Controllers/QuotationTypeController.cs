@@ -43,17 +43,23 @@ public async Task<ActionResult<IEnumerable<QuotationType>>> GetQuotationTypes([F
 }
 
 
-    [HttpGet("{id}")]
-    public async Task<ActionResult<QuotationType>> GetQuotationType(int id)
+[HttpGet("{Number}")]
+public async Task<ActionResult<IEnumerable<QuotationType>>> GetQuotationType(string Number)
+{
+    // Fetch QuotationTypes by matching the Number field (you can change the query logic as needed)
+    var quotationTypes = await _context.QuotationTypes
+                                       .Where(q => q.Number.Contains(Number)) // Adjust the query as per your need
+                                       .ToListAsync(); // Returns a list of matching QuotationTypes
+
+    if (!quotationTypes.Any()) // Check if no results were found
     {
-        var quotationType = await _context.QuotationTypes.FindAsync(id);
-        if (quotationType == null)
-        {
-            return NotFound();
-        }
-        return quotationType;
+        return NotFound(); // Return 404 if no results found
     }
-  
+
+    return Ok(quotationTypes); // Return the list of QuotationTypes
+}
+
+
 [HttpPost]
 public async Task<ActionResult<QuotationType>> CreateQuotationType([FromBody] QuotationType quotationType)
 {
@@ -83,23 +89,6 @@ public async Task<ActionResult<QuotationType>> CreateQuotationType([FromBody] Qu
     }
 }
 
-
-
-
-[HttpDelete("{id}")]
-public async Task<IActionResult> DeleteQuotationType(int id)
-{
-    var quotationType = await _context.QuotationTypes.FindAsync(id);
-    if (quotationType == null)
-    {
-        return NotFound();
-    }
-
-    _context.QuotationTypes.Remove(quotationType);
-    await _context.SaveChangesAsync();
-
-    return NoContent();
-}
 [HttpPost("save")]
 public async Task<IActionResult> SaveQuotationData([FromBody] QuotationSaveRequest request)
 {
@@ -137,9 +126,46 @@ public async Task<IActionResult> SaveQuotationData([FromBody] QuotationSaveReque
         return StatusCode(500, $"Internal server error: {ex.Message}");
     }
 }
+[HttpPut("{id}")]
+public async Task<IActionResult> UpdateQuotationType(int id, [FromBody] QuotationUpdateRequest request)
+{
+
+
+    try
+    {
+        // Fetch the existing QuotationType by Id
+        var quotationType = await _context.QuotationTypes
+            .FirstOrDefaultAsync(q => q.Id == id); // We can use FirstOrDefaultAsync here instead of Where
+
+        if (quotationType == null)
+        {
+            return NotFound("No quotation types found for the given id.");
+        }
+
+        // Update specified fields
+        if (request.RemovalRate!=default)
+        {
+            quotationType.RemovalRate = request.RemovalRate;
+        }
+        if (request.Calculate) // Add validation for 'calculate' if necessary
+        {
+            quotationType.Calculate = request.Calculate;
+        }
+
+        // Save changes to the database
+        await _context.SaveChangesAsync();
+
+        return Ok(new { message = "Quotation data updated successfully!" });
+    }
+    catch (Exception ex)
+    {
+        _logger.LogError("Error updating quotation data: {Message}", ex.Message);
+        return StatusCode(500, $"Internal server error: {ex.Message}");
+    }
 }
+
 }
-  public class QuotationSaveRequest
+public class QuotationSaveRequest
     {
         public string Number { get; set; } = string.Empty; // Ensure it's initialized
         public List<QuotationTypeDto> CleanedData { get; set; } = new List<QuotationTypeDto>(); // Initialize to avoid null
@@ -152,4 +178,12 @@ public async Task<IActionResult> SaveQuotationData([FromBody] QuotationSaveReque
         public string Category3 { get; set; } = string.Empty; // Initialize to avoid null
         public string Category4 { get; set; } = string.Empty; // Initialize to avoid null
         public double? RemovalRate { get; set; } // Nullable
+    } 
+  public class QuotationUpdateRequest
+    {
+        public int RemovalRate { get; set; } // Nullable field for partial update
+        public bool Calculate { get; set; } // Nullable field for partial update
+       
     }
+}
+  

@@ -4,7 +4,9 @@ namespace QuotationWritingSystem.Models
 {
     public class CalculationData
     {
-[Key]        public int Id { get; set; } // Primary Key
+        [Key]
+        public int Id { get; set; } // Primary Key
+        public string Number {get; set;} =string.Empty;
         public int PipeAccessoryRate { get; set; }
         public int PipeSupportRate { get; set; }
         public int CableRackAccessoryRate { get; set; }
@@ -17,6 +19,7 @@ namespace QuotationWritingSystem.Models
         public bool PerformAuxiliaryWorks { get; set; }
         public int AuxiliaryWorkRate { get; set; }
         public int OverheadRate { get; set; }
-        public int CostRate { get; set; }
+        public int CostOverHeadRate { get; set; }
+        public int CostAuxiliaryRate {get; set;}
     }
 }

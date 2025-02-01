@@ -30,6 +30,7 @@ public class RankMasterController : ControllerBase
         {
             return NotFound();
         }
+
         return rankMaster;
     }
 
@@ -52,7 +53,7 @@ public class RankMasterController : ControllerBase
         _context.Entry(rankMaster).State = EntityState.Modified;
         await _context.SaveChangesAsync();
 
-        return NoContent();
+        return Ok(rankMaster);
     }
 
     [HttpDelete("{id}")]
