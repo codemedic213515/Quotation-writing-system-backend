@@ -15,6 +15,9 @@ builder.Services.AddDbContext<ApplicationDbContext>(options =>
     options.UseSqlServer(connectionString)
 );
 
+// **✅ Register QuotationService for Dependency Injection**
+builder.Services.AddScoped<QuotationService>();
+
 // Set frontend URL dynamically based on environment
 var frontendUrl = builder.Configuration.GetValue<string>("FrontendUrls:Development");
 if (builder.Environment.IsProduction())
