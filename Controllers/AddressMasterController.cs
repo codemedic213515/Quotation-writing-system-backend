@@ -119,5 +119,41 @@ namespace QuotationWritingSystem.Controllers
 
         return NoContent();
     }
+      [HttpGet("masterdata")]
+        public async Task<ActionResult<object>> GetAddresses([FromQuery] int? zipCode, [FromQuery] string? prefecture, [FromQuery] string? city, [FromQuery] int page = 1, [FromQuery] int pageSize = 5)
+        {
+            try
+            {
+                var query = _context.AddressMaster.AsQueryable();
+
+                if (zipCode.HasValue)
+                {
+                    query = query.Where(a => a.ZipCode == zipCode);
+                }
+                if (!string.IsNullOrEmpty(prefecture))
+                {
+                    query = query.Where(a => a.Prefecture.Contains(prefecture));
+                }
+                if (!string.IsNullOrEmpty(city))
+                {
+                    query = query.Where(a => a.City.Contains(city));
+                }
+
+                var totalRecords = await query.CountAsync();
+                var addresses = await query
+                    .OrderBy(a => a.Id)
+                    .Skip((page - 1) * pageSize)
+                    .Take(pageSize)
+                    .ToListAsync();
+
+                return Ok(new { addresses, total = totalRecords });
+            }
+            catch (Exception ex)
+            {
+                _logger.LogError(ex, "Error fetching address data");
+                return StatusCode(500, "Internal Server Error. Please try again later.");
+            }
+        }
 }
+
 }
