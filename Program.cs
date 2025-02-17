@@ -29,7 +29,7 @@ builder.Services.AddCors(options =>
 {
     options.AddPolicy("AllowReactApp", policy =>
     {
-        policy.WithOrigins(frontendUrl) // Use the correct frontend URL for each environment
+        policy.WithOrigins("http://138.201.57.33:5173") // Use the correct frontend URL for each environment
               .AllowAnyHeader()
               .AllowAnyMethod()
               .AllowCredentials();
