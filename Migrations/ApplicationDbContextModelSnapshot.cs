@@ -17,7 +17,7 @@ namespace Backend.Migrations
         {
 #pragma warning disable 612, 618
             modelBuilder
-                .HasAnnotation("ProductVersion", "9.0.1")
+                .HasAnnotation("ProductVersion", "9.0.2")
                 .HasAnnotation("Relational:MaxIdentifierLength", 128);
 
             SqlServerModelBuilderExtensions.UseIdentityColumns(modelBuilder);
@@ -110,11 +110,18 @@ namespace Backend.Migrations
                     b.Property<int>("CableRackSupportRate")
                         .HasColumnType("int");
 
-                    b.Property<int>("CostRate")
+                    b.Property<int>("CostAuxiliaryRate")
+                        .HasColumnType("int");
+
+                    b.Property<int>("CostOverHeadRate")
                         .HasColumnType("int");
 
                     b.Property<int>("LightingAdditionalRate")
                         .HasColumnType("int");
+
+                    b.Property<string>("Number")
+                        .IsRequired()
+                        .HasColumnType("nvarchar(max)");
 
                     b.Property<int>("OverheadRate")
                         .HasColumnType("int");
@@ -481,14 +488,14 @@ namespace Backend.Migrations
                     b.Property<decimal>("LaborBasisRate")
                         .HasColumnType("decimal(18,2)");
 
-                    b.Property<decimal>("LaborRateA")
-                        .HasColumnType("decimal(18,2)");
+                    b.Property<int>("LaborCostA")
+                        .HasColumnType("int");
 
-                    b.Property<decimal>("LaborRateB")
-                        .HasColumnType("decimal(18,2)");
+                    b.Property<int>("LaborCostB")
+                        .HasColumnType("int");
 
-                    b.Property<bool>("Minority")
-                        .HasColumnType("bit");
+                    b.Property<int>("Minority")
+                        .HasColumnType("int");
 
                     b.Property<decimal>("MiscellRate")
                         .HasColumnType("decimal(18,2)");

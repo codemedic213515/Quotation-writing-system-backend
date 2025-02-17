@@ -1,20 +1,20 @@
 {
   "format": 1,
   "restore": {
-    "E:\\@Git\\@CodeMedic0911\\Quotation-writing-system-backend\\Backend.csproj": {}
+    "/home/dru/dru/Quotation-writing-system-backend/Backend.csproj": {}
   },
   "projects": {
-    "E:\\@Git\\@CodeMedic0911\\Quotation-writing-system-backend\\Backend.csproj": {
+    "/home/dru/dru/Quotation-writing-system-backend/Backend.csproj": {
       "version": "1.0.0",
       "restore": {
-        "projectUniqueName": "E:\\@Git\\@CodeMedic0911\\Quotation-writing-system-backend\\Backend.csproj",
+        "projectUniqueName": "/home/dru/dru/Quotation-writing-system-backend/Backend.csproj",
         "projectName": "Backend",
-        "projectPath": "E:\\@Git\\@CodeMedic0911\\Quotation-writing-system-backend\\Backend.csproj",
-        "packagesPath": "C:\\Users\\Amateur\\.nuget\\packages\\",
-        "outputPath": "E:\\@Git\\@CodeMedic0911\\Quotation-writing-system-backend\\obj\\",
+        "projectPath": "/home/dru/dru/Quotation-writing-system-backend/Backend.csproj",
+        "packagesPath": "/home/dru/.nuget/packages/",
+        "outputPath": "/home/dru/dru/Quotation-writing-system-backend/obj/",
         "projectStyle": "PackageReference",
         "configFilePaths": [
-          "C:\\Users\\Amateur\\AppData\\Roaming\\NuGet\\NuGet.Config"
+          "/home/dru/.nuget/NuGet/NuGet.Config"
         ],
         "originalTargetFrameworks": [
           "net9.0"
@@ -38,7 +38,7 @@
           "auditLevel": "low",
           "auditMode": "direct"
         },
-        "SdkAnalysisLevel": "9.0.100"
+        "SdkAnalysisLevel": "9.0.200"
       },
       "frameworks": {
         "net9.0": {
@@ -58,11 +58,17 @@
             },
             "Microsoft.EntityFrameworkCore": {
               "target": "Package",
-              "version": "[9.0.1, )"
+              "version": "[9.0.2, )"
+            },
+            "Microsoft.EntityFrameworkCore.Design": {
+              "include": "Runtime, Build, Native, ContentFiles, Analyzers, BuildTransitive",
+              "suppressParent": "All",
+              "target": "Package",
+              "version": "[9.0.2, )"
             },
             "Microsoft.EntityFrameworkCore.SqlServer": {
               "target": "Package",
-              "version": "[9.0.1, )"
+              "version": "[9.0.2, )"
             },
             "Microsoft.EntityFrameworkCore.Tools": {
               "include": "Runtime, Build, Native, ContentFiles, Analyzers, BuildTransitive",
@@ -98,7 +104,7 @@
               "privateAssets": "all"
             }
           },
-          "runtimeIdentifierGraphPath": "C:\\Program Files\\dotnet\\sdk\\9.0.102/PortableRuntimeIdentifierGraph.json"
+          "runtimeIdentifierGraphPath": "/usr/share/dotnet/sdk/9.0.200/PortableRuntimeIdentifierGraph.json"
         }
       }
     }

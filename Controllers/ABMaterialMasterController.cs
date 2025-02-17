@@ -23,6 +23,38 @@ namespace QuotationWritingSystem.Controllers
             return await _context.ABMaterialMaster.ToListAsync();
         }
 
+[HttpGet("masterdata")]
+public async Task<IActionResult> GetABMaterialMaster(
+    [FromQuery] string? Name, 
+    [FromQuery] string? CategoryName, 
+    [FromQuery] string? ABCode, 
+    [FromQuery] int page = 1, 
+    [FromQuery] int pageSize = 5)
+{
+    var query = _context.ABMaterialMaster.AsQueryable();
+
+    if (!string.IsNullOrEmpty(Name))
+    {
+        query = query.Where(m => m.Name.Contains(Name));
+    }
+    if (!string.IsNullOrEmpty(CategoryName))
+    {
+        query = query.Where(m => m.CategoryName.Contains(CategoryName));
+    }
+    if (!string.IsNullOrEmpty(ABCode))
+    {
+        query = query.Where(m => m.ABCode.Contains(ABCode));
+    }
+
+    int total = await query.CountAsync();
+    var materials = await query
+        .OrderBy(m => m.Id)
+        .Skip((page - 1) * pageSize)
+        .Take(pageSize)
+        .ToListAsync();
+
+    return Ok(new { materials, total });
+}
         // GET: api/ABMaterialMaster/{id}
         [HttpGet("{id}")]
         public async Task<ActionResult<ABMaterialMaster>> GetABMaterialMaster(int id)

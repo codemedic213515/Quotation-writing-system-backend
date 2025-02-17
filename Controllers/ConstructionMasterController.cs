@@ -21,7 +21,26 @@ public class ConstructionMasterController : ControllerBase
     {
         return await _context.ConstructionMasters.ToListAsync();
     }
+ [HttpGet("masterdata")]
+        public async Task<ActionResult<object>> GetConstructions([FromQuery] int page = 1, [FromQuery] int pageSize = 5)
+        {
+            try
+            {
+                var query = _context.ConstructionMasters.AsQueryable();
+                var totalRecords = await query.CountAsync();
+                var constructions = await query
+                    .OrderBy(c => c.Id)
+                    .Skip((page - 1) * pageSize)
+                    .Take(pageSize)
+                    .ToListAsync();
 
+                return Ok(new { constructions, total = totalRecords });
+            }
+            catch (Exception ex)
+            {
+                return StatusCode(500, "Internal Server Error. Please try again later.");
+            }
+        }
     [HttpGet("{id}")]
     public async Task<ActionResult<ConstructionMaster>> GetConstructionMaster(int id)
     {

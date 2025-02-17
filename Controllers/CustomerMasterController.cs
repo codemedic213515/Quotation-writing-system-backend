@@ -108,5 +108,40 @@ public async Task<ActionResult<CustomerMaster>> CreateCustomerMaster([FromBody] 
 
         return NoContent();
     }
+    [HttpGet("masterdata")]
+        public async Task<ActionResult<object>> GetCustomers([FromQuery] string? name, [FromQuery] string? group, [FromQuery] string? rank, [FromQuery] int page = 1, [FromQuery] int pageSize = 5)
+        {
+            try
+            {
+                var query = _context.CustomerMasters.AsQueryable();
+
+                if (!string.IsNullOrEmpty(name))
+                {
+                    query = query.Where(c => c.Name.Contains(name));
+                }
+                if (!string.IsNullOrEmpty(group))
+                {
+                    query = query.Where(c => c.Group.Contains(group));
+                }
+                if (!string.IsNullOrEmpty(rank))
+                {
+                    query = query.Where(c => c.Rank.Contains(rank));
+                }
+
+                var totalRecords = await query.CountAsync();
+                var customers = await query
+                    .OrderBy(c => c.Id)
+                    .Skip((page - 1) * pageSize)
+                    .Take(pageSize)
+                    .ToListAsync();
+
+                return Ok(new { customers, total = totalRecords });
+            }
+            catch (Exception ex)
+            {
+                _logger.LogError(ex, "Error fetching customer data");
+                return StatusCode(500, "Internal Server Error. Please try again later.");
+            }
+        }
 }
 }
