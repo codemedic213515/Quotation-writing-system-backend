@@ -83,23 +83,52 @@ public class MaterialMasterController : ControllerBase
         return NoContent();
     }
 
-    //   [HttpGet("/masterdata")]
-    // public async Task<ActionResult<IEnumerable<MaterialMaster>>> GetMaterialMasters(
-    //     [FromQuery] int category1,
-    //     [FromQuery] int category2,
-    //     [FromQuery] int category3
-    //    )
+ [HttpGet("masterdata")]
+public async Task<ActionResult<IEnumerable<MaterialMaster>>> GetMaterialMasters(
+    [FromQuery] int? category1,
+    [FromQuery] int? category2,
+    [FromQuery] int? category3,
+    [FromQuery] string? abCode,
+    [FromQuery] int page = 1,
+    [FromQuery] int pageSize = 10)
+{
+    if (category1 == null)
+    {
+        return BadRequest("Category1 is required.");
+    }
+
+    var query = _context.MaterialMasters.AsQueryable();
+
+    if (category1.HasValue)
+    {
+        query = query.Where(m => m.Category1 == category1);
+    }
+    if (category2.HasValue && category2 > 0)
+    {
+        query = query.Where(m => m.Category2 == category2);
+    }
+    if (category3.HasValue && category3 > 0)
+    {
+        query = query.Where(m => m.Category3 == category3);
+    }
+    // if (!string.IsNullOrEmpty(abCode))
     // {
-    //     if(category1 <=0 ||category2<=0|| category3<=0){
-    //         return BadRequest("Invalid category1 or category2 or category3 or category 4 values.");
-    //     }
-    //     var filterMaterial = await _context.MaterialMasters
-    //     .Where(m=> m.Category1==category1 && m.Category2==category2 && m.Category3==category3)
-    //     .ToListAsync();
-    //     if(!filterMaterial.Any()){
-    //         return NotFound("No material masters found");
-    //     }
-    //     return Ok(filterMaterial);
+    //     query = query.Where(m => m.ABCode == abCode);
     // }
+
+    var totalRecords = await query.CountAsync();
+    var filterMaterial = await query
+        .Skip((page - 1) * pageSize)
+        .Take(pageSize)
+        .ToListAsync();
+
+    if (!filterMaterial.Any())
+    {
+        return NotFound("No material masters found");
+    }
+
+    return Ok(new { total = totalRecords, items = filterMaterial });
+}
+
 }
 }
