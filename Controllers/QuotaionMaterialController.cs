@@ -32,6 +32,20 @@ public class QuotationMaterialController : ControllerBase
         }
         return quotationMaterial;
     }
+[HttpGet("type/{typeId}")]
+public async Task<ActionResult<IEnumerable<QuotationMaterial>>> GetQuotationMaterials(int typeId)
+{
+    var quotationMaterials = await _context.QuotationMaterials
+        .Where(qm => qm.TypeId == typeId)
+        .ToListAsync();
+
+    if (quotationMaterials == null || !quotationMaterials.Any())
+    {
+        return NotFound();
+    }
+
+    return Ok(quotationMaterials);
+}
 
     [HttpPost]
 public async Task<ActionResult> CreateQuotationMaterials([FromBody] List<QuotationMaterial> quotationMaterials)

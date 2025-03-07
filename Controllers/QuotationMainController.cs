@@ -45,7 +45,7 @@ namespace QuotationWritingSystem.Controllers
         [HttpGet]
         public async Task<ActionResult> GetQuotationMains(
             [FromQuery] int page = 1,
-            [FromQuery] int pageSize = 10, // Default to 10 if not provided
+            [FromQuery] int pageSize = 5, 
             [FromQuery] string? creater = null,
             [FromQuery] string? code = null,
             [FromQuery] DateTime? createDate = null)
