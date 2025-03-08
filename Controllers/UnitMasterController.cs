@@ -21,6 +21,22 @@ public class UnitMasterController : ControllerBase
     {
         return await _context.UnitMasters.ToListAsync();
     }
+[HttpGet("unitdata")]
+public async Task<ActionResult> GetUnitMasters(
+    [FromQuery] int page = 1,
+    [FromQuery] int pageSize = 5)
+{
+    var query = _context.UnitMasters.AsQueryable();
+
+    var totalRecords = await query.CountAsync();
+    
+    var items = await query
+        .Skip((page - 1) * pageSize)
+        .Take(pageSize)
+        .ToListAsync();
+
+    return Ok(new { total = totalRecords, items = items });
+}
 
     [HttpGet("{id}")]
     public async Task<ActionResult<UnitMaster>> GetUnitMaster(int id)

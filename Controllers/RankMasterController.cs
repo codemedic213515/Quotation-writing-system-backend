@@ -21,6 +21,23 @@ public class RankMasterController : ControllerBase
     {
         return await _context.RankMasters.ToListAsync();
     }
+[HttpGet("rankdata")]
+public async Task<ActionResult> GetRankData(
+    [FromQuery] int page = 1,
+    [FromQuery] int pageSize = 5)
+{
+    var query = _context.RankMasters.AsQueryable();
+
+    var totalRecords = await query.CountAsync();
+    var totalAmount = await query.SumAsync(m => (m.LaborCostA ?? 0) + (m.LaborCostB ?? 0) + (m.SiteMiscell ?? 0) + (m.OtherExpens ?? 0));
+
+    var items = await query
+        .Skip((page - 1) * pageSize)
+        .Take(pageSize)
+        .ToListAsync();
+
+    return Ok(new { total = totalRecords, totalAmount = totalAmount, items = items });
+}
 
     [HttpGet("{id}")]
     public async Task<ActionResult<RankMaster>> GetRankMaster(int id)
