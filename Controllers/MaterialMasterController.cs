@@ -88,34 +88,26 @@ public async Task<ActionResult<IEnumerable<MaterialMaster>>> GetMaterialMasters(
     [FromQuery] int? category1,
     [FromQuery] int? category2,
     [FromQuery] int? category3,
-    [FromQuery] string? abCode,
     [FromQuery] int page = 1,
-    [FromQuery] int pageSize = 10)
+    [FromQuery] int pageSize = 5)
 {
-    if (category1 == null)
-    {
-        return BadRequest("Category1 is required.");
-    }
-
     var query = _context.MaterialMasters.AsQueryable();
 
     if (category1.HasValue)
     {
         query = query.Where(m => m.Category1 == category1);
+        
+        if (category2.HasValue && category2 > 0)
+        {
+            query = query.Where(m => m.Category2 == category2);
+            
+            if (category3.HasValue && category3 > 0)
+            {
+                query = query.Where(m => m.Category3 == category3);
+            }
+        }
     }
-    if (category2.HasValue && category2 > 0)
-    {
-        query = query.Where(m => m.Category2 == category2);
-    }
-    if (category3.HasValue && category3 > 0)
-    {
-        query = query.Where(m => m.Category3 == category3);
-    }
-    // if (!string.IsNullOrEmpty(abCode))
-    // {
-    //     query = query.Where(m => m.ABCode == abCode);
-    // }
-
+    
     var totalRecords = await query.CountAsync();
     var filterMaterial = await query
         .Skip((page - 1) * pageSize)
