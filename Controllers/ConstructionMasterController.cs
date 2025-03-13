@@ -10,10 +10,11 @@ namespace QuotationWritingSystem.Controllers
 public class ConstructionMasterController : ControllerBase
 {
     private readonly ApplicationDbContext _context;
-
-    public ConstructionMasterController(ApplicationDbContext context)
+  private readonly ILogger<ConstructionMasterController> _logger;
+    public ConstructionMasterController(ApplicationDbContext context, ILogger<ConstructionMasterController> logger)
     {
         _context = context;
+        _logger = logger;
     }
 
     [HttpGet]
@@ -38,6 +39,7 @@ public class ConstructionMasterController : ControllerBase
             }
             catch (Exception ex)
             {
+                _logger.LogInformation(ex, "Error fetching construction data");
                 return StatusCode(500, "Internal Server Error. Please try again later.");
             }
         }

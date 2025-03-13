@@ -13,14 +13,14 @@ public class QuotationDataController : ControllerBase
     }
 
     [HttpGet("formatted")]
-    public async Task<IActionResult> GetFormattedQuotationData([FromQuery] string quotationNumber)
+    public async Task<IActionResult> GetFormattedQuotationQuotate([FromQuery] string quotationNumber)
     {
         if (string.IsNullOrEmpty(quotationNumber))
         {
             return BadRequest(new { Message = "Quotation number is required." });
         }
 
-        var result = await _quotationService.GetFormattedQuotationData(quotationNumber);
+        var result = await _quotationService.GetFormattedQuotationQuotate(quotationNumber);
 
         if (result == null || !result.Any())
         {
@@ -29,4 +29,24 @@ public class QuotationDataController : ControllerBase
 
         return Ok(result);
     }
+
+    [HttpGet("net")]
+    public async Task<IActionResult> GetFormattedQuotationNet([FromQuery] string quotationNumber)
+    {
+        if (string.IsNullOrEmpty(quotationNumber))
+        {
+            return BadRequest(new { Message = "Quotation number is required." });
+        }
+
+        var result = await _quotationService.GetFormattedQuotationNet(quotationNumber);
+
+        if (result == null || !result.Any())
+        {
+            return NotFound(new { Message = "No data" });
+        }
+
+        return Ok(result);
+    }
+
+
 }
