@@ -29,16 +29,24 @@ public class QuotationController : ControllerBase
 
         return Ok(result);
     }
-    [HttpGet("type")]
-    public async Task<IActionResult> GetCostsForEachQuotationType([FromQuery] string quotationNumber)
+  [HttpGet("type")]
+public async Task<IActionResult> GetCostsForEachQuotationType([FromQuery] string quotationNumber)
+{
+    if (string.IsNullOrEmpty(quotationNumber))
     {
-        if (string.IsNullOrEmpty(quotationNumber))
-        {
-            return BadRequest(new { Message = "Quotation number is required." });
-        }
-
-        var result = await _quotationService.GetCostsForEachQuotationType(quotationNumber);
-
-        return Ok(result);
+        return BadRequest(new { Message = "Quotation number is required." });
     }
+
+    var result = await _quotationService.GetCostsForEachQuotationType(quotationNumber);
+
+    if (result == null || !result.Any())  // Check if result is null or empty
+    {
+        return NotFound(new { Message = "No data" });
+    }else{
+
+    return Ok(result);
+    }
+
+}
+
 }

@@ -109,23 +109,23 @@ public async Task<ActionResult<CustomerMaster>> CreateCustomerMaster([FromBody] 
         return NoContent();
     }
     [HttpGet("masterdata")]
-        public async Task<ActionResult<object>> GetCustomers([FromQuery] string? name, [FromQuery] string? group, [FromQuery] string? rank, [FromQuery] int page = 1, [FromQuery] int pageSize = 5)
+        public async Task<IActionResult> GetCustomer([FromQuery] string? Name, [FromQuery] string? Group, [FromQuery] string? Rank, [FromQuery] int page = 1, [FromQuery] int pageSize = 5)
         {
             try
             {
                 var query = _context.CustomerMasters.AsQueryable();
 
-                if (!string.IsNullOrEmpty(name))
+                if (!string.IsNullOrEmpty(Name))
                 {
-                    query = query.Where(c => c.Name.Contains(name));
+                    query = query.Where(c => c.Name.Contains(Name));
                 }
-                if (!string.IsNullOrEmpty(group))
+                if (!string.IsNullOrEmpty(Group))
                 {
-                    query = query.Where(c => c.Group.Contains(group));
+                    query = query.Where(c => c.Group.Contains(Group));
                 }
-                if (!string.IsNullOrEmpty(rank))
+                if (!string.IsNullOrEmpty(Rank))
                 {
-                    query = query.Where(c => c.Rank.Contains(rank));
+                    query = query.Where(c => c.Rank.Contains(Rank));
                 }
 
                 var totalRecords = await query.CountAsync();
