@@ -308,7 +308,65 @@ public async Task<IActionResult> CalculateQuotationImp([FromQuery] string quotat
         ABMaterialSums = abMaterialSums.Select(kv => new { ABCode = kv.Key, Sum = kv.Value }).ToList(),
         QuotationTypeDetails = quotationTypeDetails
     });
-}private decimal SafeDecimal(object value)
+}
+
+[HttpGet("end/{quotationNumber}")]
+    public async Task<IActionResult> GetQuotationMaterials(string quotationNumber)
+    {
+        if (string.IsNullOrEmpty(quotationNumber))
+        {
+            return BadRequest(new { Message = "Quotation number is required." });
+        }
+
+        var quotationTypes = await _context.QuotationTypes
+            .Where(qt => qt.Number == quotationNumber)
+            .ToListAsync();
+
+        if (!quotationTypes.Any())
+        {
+            return NotFound(new { Message = "No quotation types found for the given quotation number." });
+        }
+
+        var quotationTypeIds = quotationTypes.Select(qt => qt.Id).ToList();
+        var materials = await _context.QuotationMaterials
+            .Where(qm => qm.TypeId.HasValue && quotationTypeIds.Contains(qm.TypeId.Value))
+            .ToListAsync();
+
+        if (!materials.Any())
+        {
+            return NotFound(new { Message = "No materials found for the given quotation." });
+        }
+
+        var abMaterials = await _context.ABMaterialMaster.ToListAsync();
+        var groupedMaterials = new Dictionary<string, List<object>>
+        {
+            { "ABCode1", new List<object>() },
+            { "ABCode2", new List<object>() },
+            { "Others", new List<object>() }
+        };
+
+        foreach (var material in materials)
+        {
+            var abMaterial = abMaterials.FirstOrDefault(ab => ab.Name == material.Category);
+            string categoryType = abMaterial?.ABCode == "1" ? "ABCode1" : abMaterial?.ABCode == "2" ? "ABCode2" : "Others";
+            
+            var materialMaster = await _context.MaterialMasters
+                .FirstOrDefaultAsync(a => a.CategoryNam == material.Category && a.Name == material.Category3);
+            decimal internalCost = SafeDecimal(materialMaster?.InternalCos ?? 0) * SafeDecimal(material.Quantity) * SafeDecimal(material.StepRate);
+            decimal priceCost = SafeDecimal(material.Price) * SafeDecimal(material.Quantity) * SafeDecimal(material.StepRate);
+
+            groupedMaterials[categoryType].Add(new
+            {   Id = abMaterial?.Id,
+                MaterialName = material.Category3,
+                Category = material.Category,
+                InternalCost = internalCost,
+                PriceCost = priceCost
+            });
+        }
+
+        return Ok(groupedMaterials);
+    }
+private decimal SafeDecimal(object value)
 {
     if (value == null || string.IsNullOrWhiteSpace(value.ToString()))
     {
